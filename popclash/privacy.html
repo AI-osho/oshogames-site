@@ -32,7 +32,7 @@
 <p style="margin:0 0 1.4rem"><a href="index.html">← POP CLASH</a></p>
 
 <h1>POP CLASH — Privacy Policy</h1>
-<p class="sub">Last updated: 20 August 2026</p>
+<p class="sub">Last updated: 5 October 2026 (version 2.0)</p>
 
 <div class="box">POP CLASH plays entirely offline. There is no account and no
 sign-in. Two features are optional and you choose whether to use them: connecting
@@ -42,16 +42,22 @@ the network switched off, exactly as before.</div>
 <h2>What the app collects on its own</h2>
 <p>Nothing. There is no analytics, no advertising, no crash reporting and no
 third-party SDK that transmits data. The app requests no runtime permissions: no
-camera, microphone, contacts, location, storage or identifiers. Nothing is sent
-anywhere unless you press a button that says it will.</p>
+camera, microphone, contacts, location, storage or identifiers. Besides internet
+access, which only the optional ranking uses, the only permission it declares is
+vibration, for short haptic feedback during matches. Nothing is sent anywhere
+unless you press a button that says it will.</p>
 
 <h2>What the app stores on your device</h2>
 <p>One save file, held in the app's own private storage. It contains your coins,
 the equipment you own and have equipped, your skill levels, your quest progress,
 your chosen language, a count of matches played and won, and — if you have played
-the weekly challenge — your best time for the current week together with the
-recorded button presses from that run. It never leaves your device unless you
-submit it to the ranking. Uninstalling the app removes it.</p>
+the weekly challenge — your best record for the current week (how many fighters
+you beat, and your time) together with the recorded button presses from that run.
+It also keeps your daily mini-game results, the friend challenge codes you have
+played, your fighter records and rewards, and your settings (button layout,
+vibration, flashes, controllers). The save file never leaves your device; only your
+weekly challenge record is sent, and only if you submit it to the ranking.
+Uninstalling the app removes it.</p>
 <p>If you connect a wallet, the app also stores your wallet's public address and
 the authorisation token the wallet gave it, so you do not have to approve again
 every time. Disconnecting removes both.</p>
@@ -62,13 +68,15 @@ every time. Disconnecting removes both.</p>
 receive nothing from it, and we never see your private key or seed phrase. The
 app never asks your wallet to approve a transaction, spend anything, or write to
 any blockchain — the only thing it ever asks for is a signature that proves you
-own the address, and only when you submit a ranking time.</p>
+own the address, and only when you submit to the ranking. If you have not
+connected a wallet yet, pressing SUBMIT opens your wallet app once, to connect and
+sign together.</p>
 <p>If your wallet reports a display name for the account (for example a Seeker ID
 ending in <code>.skr</code>), the app shows that name instead of your address.</p>
 
 <h2>The weekly ranking (optional)</h2>
-<p>The ranking is the only part of POP CLASH that uses the internet. It is off
-unless you use it.</p>
+<p>The ranking is the only part of POP CLASH that uses the internet: when you
+open it, submit to it, or watch the top run. It is off unless you use it.</p>
 
 <h3>When you press SUBMIT</h3>
 <p>The app sends the following to <code>api.oshogames.com</code>, a server
@@ -77,8 +85,8 @@ operated by OSHO GAMES:</p>
   <tr><th>What</th><th>Why</th></tr>
   <tr><td>Your wallet's public address</td><td>To identify the entry as yours. This is public information; it is not a private key.</td></tr>
   <tr><td>The display name your wallet reports (e.g. <code>osho.skr</code>), if any</td><td>To show a readable name on the board instead of an address.</td></tr>
-  <tr><td>The week number and your clear time</td><td>The entry itself.</td></tr>
-  <tr><td><strong>The button presses recorded during that run</strong></td><td>So the server can replay the run and confirm the time is real. Without this, any time could be claimed. It is a list of which buttons were held on each frame — nothing else.</td></tr>
+  <tr><td>The week number, how many fighters you beat, and your time</td><td>The entry itself.</td></tr>
+  <tr><td><strong>The button presses recorded during that run</strong></td><td>So the server can replay the run and confirm the record is real. Without this, any record could be claimed. It is a list of which buttons were held on each frame — nothing else.</td></tr>
   <tr><td>A signature made by your wallet</td><td>To prove the entry came from the owner of that address.</td></tr>
   <tr><td>The version number of the game</td><td>So the server replays with the matching version of the game code.</td></tr>
 </table>
@@ -91,25 +99,52 @@ you do on your phone.</p>
 address is included in that request so the server can tell you your own position.
 Nothing else is sent.</p>
 
+<h3>When you watch the top run</h3>
+<p>The app downloads that entry's recorded run (the button presses only) from our
+server and replays it inside the game.</p>
+
 <h3>What is stored, and what is public</h3>
-<p>For each week we keep one entry per wallet address: the address, the display
-name, the time, the recorded run, and when it was submitted. <strong>The name and
-the time are shown publicly on the leaderboard inside the game.</strong> The
-recorded run is kept so an entry can be re-checked; it is not published.</p>
+<p>For each week, and for each version of the game, we keep one entry per wallet
+address: the address, the display name, how many fighters you beat, the time, the
+game version, the recorded run, and when it was submitted. <strong>The name, how
+many fighters you beat and the time are shown publicly on the leaderboard inside
+the game.</strong> The recorded run (the button presses only) of each of the top
+ten entries on a board can be downloaded from our server by anyone, so that it can
+be replayed and watched in the game. Other recorded runs are kept so an entry can
+be re-checked; they are not published.</p>
 <p>Entries are kept while the game is in service. You can ask us to delete yours
 at any time — email the address below from any address, telling us the wallet
 address to remove.</p>
 
-<h3>Server logs</h3>
-<p>Like any web server, ours records the IP address, time and path of requests it
-receives, for security and troubleshooting. These logs are rotated and discarded
-in the ordinary course; they are not combined with ranking entries and are not
-used to build a profile of anyone.</p>
+<h3>Seeker Genesis Token check</h3>
+<p>When you submit, our server checks whether the submitting wallet holds a Seeker
+Genesis Token (the token given to each Solana Seeker phone). It asks a public
+Solana RPC service (by default <code>api.mainnet-beta.solana.com</code>) for the
+public token accounts of your wallet address — information that is already public
+on the Solana blockchain. The result (whether a token was found, and the token's
+address) is stored with your entry; a lookup is reused for up to one day. If a
+token is found, a SEEKER tag is shown next to your name on the ranking, and your
+entry also appears on the Seeker-only board (one entry per token).</p>
+
+<h3>Server logs and backups</h3>
+<p>Like most web servers, ours keeps access logs (IP address, time and request) for
+about two weeks (15 days at most) for security, and then deletes them. Submissions that are rejected
+are recorded with the reason, a short technical note and the wallet address that
+was sent, and kept for up to 30 days. The ranking data is backed up daily, and
+backups are kept for 14 days. None of this is combined with anything else or used
+to build a profile of anyone.</p>
+
+<h2>Vibration and controllers</h2>
+<p>The app can vibrate during matches; you can turn this off in Settings. Game
+controllers are read only to play. Nothing about either is sent; only your settings
+for them are saved on your device.</p>
 
 <h2>Who else receives anything</h2>
-<p>Nobody. There is no analytics provider, no advertising network and no data
-broker. The ranking server is run by OSHO GAMES and does not share what it holds
-with third parties. We would disclose information only if we were legally
+<p>There is no analytics provider, no advertising network and no data broker.
+The ranking server is run by OSHO GAMES and does not share what it holds with third
+parties. The only outside service it contacts is the public Solana RPC service
+described above, which receives your wallet address when the server checks for a
+Seeker Genesis Token. We would disclose information only if we were legally
 required to.</p>
 
 <h2>Children</h2>
@@ -122,6 +157,14 @@ no chat, messaging or other way for players to communicate.</p>
 <h2>Changes</h2>
 <p>If a future version collects anything not described here, this page will be
 updated before that version is released, and the change will be described here.</p>
+
+<h3>What changed in version 2.0</h3>
+<p>The weekly ranking lists any run that beats at least one fighter, and records
+how many fighters you beat alongside your time. Boards are kept separately for each
+version of the game. You can connect a wallet at the moment you submit. The
+recorded runs of the top entries can be watched by other players. Our server checks
+for a Seeker Genesis Token when you submit. Daily mini-games, friend challenge
+codes, fighter records and settings stay on your device.</p>
 
 <h3>What changed in version 1.1</h3>
 <p>Version 1.0 had no network functionality at all. Version 1.1 adds optional

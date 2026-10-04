@@ -4,201 +4,314 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>POP CLASH — Eight fighters. One arena.</title>
-<meta name="description" content="A platform fighter built for two thumbs on a phone. Eight fighters, quest mode with bosses, gear and skills. Plays offline, no ads, no purchases. Optional wallet and weekly ranking.">
+<meta name="description" content="A platform fighter built for two thumbs on a phone. Eight comic-book fighters, a new mini-game every day, weekly medals and an optional verified ranking. Free, no ads, no purchases, plays offline.">
+<link rel="canonical" href="https://oshogames.com/popclash/">
 <link rel="icon" href="img/icon.png">
+<link rel="apple-touch-icon" href="img/icon.png">
+<meta name="theme-color" content="#E8467C">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OSHO GAMES">
 <meta property="og:title" content="POP CLASH">
 <meta property="og:description" content="Eight fighters. One arena. Knock everyone else off the stage.">
-<meta property="og:image" content="https://ai-osho.github.io/popclash/img/banner.jpg">
-<meta property="og:url" content="https://ai-osho.github.io/popclash/">
+<meta property="og:url" content="https://oshogames.com/popclash/">
+<meta property="og:image" content="https://oshogames.com/popclash/img/banner.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="600">
+<meta property="og:image:alt" content="POP CLASH — the eight fighters">
 <meta name="twitter:card" content="summary_large_image">
-<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "POP CLASH",
+  "url": "https://oshogames.com/popclash/",
+  "image": "https://oshogames.com/popclash/img/banner.jpg",
+  "description": "A platform fighter built for two thumbs on a phone. Eight fighters, one arena: damage builds a percentage, and the higher it climbs, the further the next hit sends you flying.",
+  "genre": "Platform fighter",
+  "gamePlatform": "Android",
+  "operatingSystem": "Android",
+  "applicationCategory": "GameApplication",
+  "inLanguage": ["en", "ja", "es", "zh", "ko", "fr", "de", "pt"],
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "publisher": { "@type": "Organization", "name": "OSHO GAMES", "url": "https://oshogames.com/" }
+}
+</script>
 <style>
+  /* 書体はサイト内に同梱（外部 CDN に依存しない）
+     Lilita One — SIL Open Font License 1.1（fonts/OFL-LilitaOne.txt）
+     Press Start 2P — SIL Open Font License 1.1 */
+  @font-face{font-family:"Lilita One";font-style:normal;font-weight:400;font-display:swap;
+    src:url("../fonts/lilita-one.woff2") format("woff2")}
+  @font-face{font-family:"Press Start 2P";font-style:normal;font-weight:400;font-display:swap;
+    src:url("../fonts/press-start-2p.woff2") format("woff2")}
+
+  /* ============================================================
+     POP CLASH — POP COMIC TOYS（V2.0 の絵に合わせる）
+     ・二重のフチ: 紺の線＋白いシールの縁
+     ・平塗り＋網点（グラデーションは使わない）
+     ・色はゲームの物（ピンク #E8467C・ミント #5CC9A7・紺 #1A2236）
+     上の帯とフッターはスタジオの面なので白黒のまま。
+     ============================================================ */
   :root{
-    --pink:#E8467C; --teal:#3CB49B; --sun:#FFD23F; --ink:#0C0716;
-    --paper:#140E22; --line:rgba(255,255,255,.12); --dim:#A79CC0;
+    --pink:#E8467C; --mint:#5CC9A7; --navy:#1A2236; --ink:#1E1433; --paper:#FFF8EC;
+    --fx:#FFE24A; --p1:#3D7BFF; --p2:#FF4757; --p3:#FFC531; --p4:#2ED47A; --white:#FFFFFF;
+    --display:"Lilita One", "Arial Rounded MT Bold", "Arial Black", system-ui, sans-serif;
+    --body:system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
+    --px:"Press Start 2P", ui-monospace, monospace;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0; background:var(--ink); color:#F3EFFA;
-    font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",
-         Arial,"Hiragino Sans","Noto Sans JP",sans-serif;
-    -webkit-font-smoothing:antialiased;
+  html{scroll-behavior:smooth; background:var(--paper)}
+  body{margin:0; background:var(--paper); color:var(--ink); font:16px/1.7 var(--body);
+       -webkit-text-size-adjust:100%}
+  img,video{max-width:100%; display:block}
+  a{color:inherit}
+  .wrap{max-width:1080px; margin-inline:auto; padding-inline:20px}
+  .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+  /* ---------- スタジオの帯（白黒） ---------- */
+  .bar{position:sticky; top:0; z-index:20; background:#000; color:#fff; border-bottom:3px solid #fff}
+  .bar .wrap{display:flex; align-items:center; gap:12px; height:60px}
+  .bar .face{flex:0 0 auto; width:40px; height:40px; border:2px solid #fff; image-rendering:auto}
+  .bar a:first-child{flex:0 0 auto; line-height:0}
+  .bar .home{font:400 11px/1 var(--px); color:#fff; text-decoration:none; white-space:nowrap}
+  .bar nav{margin-left:auto; display:flex; gap:6px}
+  .bar nav a{font:400 10px/1 var(--px); color:#fff; text-decoration:none; padding:12px 8px}
+  .bar nav a:hover{background:#fff; color:#000}
+  @media (max-width:480px){ .bar nav .wide{display:none} }
+
+  /* ---------- ヒーロー（ピンクとミントの斜めの割り＋網点） ---------- */
+  .hero{position:relative; overflow:hidden; text-align:center; padding:36px 0 46px;
+    background:linear-gradient(160deg, var(--pink) 0 49%, var(--navy) 49% 51.5%, var(--mint) 51.5% 100%)}
+  .hero:before{content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,.22) 23%, transparent 25%);
+    background-size:16px 16px}
+  .hero .wrap{position:relative}
+  .sticker{display:inline-block; font:400 15px/1 var(--display); letter-spacing:.04em;
+    background:var(--fx); color:var(--ink); padding:8px 14px 7px; border:3px solid var(--ink);
+    border-radius:999px; box-shadow:0 0 0 3px var(--white); transform:rotate(-3deg); margin:0 0 18px}
+  .banner{width:100%; max-width:840px; height:auto; margin:0 auto; border:4px solid var(--ink);
+    border-radius:22px; box-shadow:0 0 0 6px var(--white), 0 0 0 10px var(--ink)}
+  .tag{margin:30px 0 4px; font:400 clamp(30px,6.2vw,54px)/1.08 var(--display); color:var(--white);
+    letter-spacing:.01em; paint-order:stroke fill; -webkit-text-stroke:8px var(--ink);
+    text-shadow:0 5px 0 var(--ink)}
+  .sub{margin:6px 0 26px; font:400 clamp(17px,2.6vw,22px)/1.3 var(--display); color:var(--ink)}
+  .ctas{display:flex; flex-wrap:wrap; justify-content:center; gap:14px}
+  .btn{display:inline-block; font:400 18px/1 var(--display); letter-spacing:.02em; text-decoration:none;
+    color:var(--ink); padding:16px 24px 15px; border:3px solid var(--ink); border-radius:16px;
+    box-shadow:0 6px 0 var(--ink); background:var(--white); min-height:52px}
+  .btn.get{background:var(--fx)}
+  .btn:active{transform:translateY(4px); box-shadow:0 2px 0 var(--ink)}
+  .note{max-width:34rem; margin:18px auto 0; font-size:14.5px; line-height:1.55; color:var(--ink);
+    background:rgba(255,255,255,.9); border:2px solid var(--ink); border-radius:12px; padding:10px 14px}
+  .chips{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; list-style:none; padding:0; margin:22px 0 0}
+  .chips li{font:400 14px/1 var(--display); letter-spacing:.03em; background:var(--white); color:var(--ink);
+    border:2px solid var(--ink); border-radius:999px; padding:8px 13px 7px}
+
+  /* ---------- セクション（網点の紙） ---------- */
+  section{padding:58px 0 64px; border-top:4px solid var(--ink)}
+  .dots{background-color:var(--paper);
+    background-image:radial-gradient(rgba(232,70,124,.13) 22%, transparent 24%); background-size:14px 14px}
+  .mint{background-color:#E3F6EF;
+    background-image:radial-gradient(rgba(26,34,54,.08) 22%, transparent 24%); background-size:14px 14px}
+  h2{margin:0 0 14px}
+  h2 span{display:inline-block; font:400 clamp(26px,4.4vw,38px)/1.1 var(--display); letter-spacing:.01em;
+    background:var(--fx); color:var(--ink); padding:10px 18px 8px; border:3px solid var(--ink);
+    border-radius:14px; box-shadow:5px 5px 0 var(--ink); transform:rotate(-1.5deg)}
+  .lead{max-width:60ch; margin:10px 0 28px; font-size:17px}
+
+  .screen{border:4px solid var(--ink); border-radius:18px; overflow:hidden; background:var(--navy);
+    box-shadow:0 0 0 5px var(--white), 0 0 0 9px var(--ink)}
+  .screen video{width:100%; height:auto; aspect-ratio:16/9; background:var(--navy)}
+
+  /* ---------- 中身のカード ---------- */
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; margin-top:10px}
+  .card{position:relative; background:var(--white); border:3px solid var(--ink); border-radius:18px;
+    box-shadow:6px 6px 0 var(--ink); padding:0 20px 18px; overflow:visible}
+  .card h3{margin:0 -20px 14px; padding:12px 20px 10px; font:400 22px/1.15 var(--display); letter-spacing:.02em;
+    background:var(--c); color:var(--ink); border-bottom:3px solid var(--ink); border-radius:15px 15px 0 0}
+  .card p{margin:0; font-size:15.5px; line-height:1.6}
+  .card .opt{display:block; margin-top:8px; font-size:13.5px; font-weight:700}
+  .new{position:absolute; top:-14px; right:14px; font:400 14px/1 var(--display); letter-spacing:.04em;
+    background:var(--p2); color:var(--white); padding:7px 11px 6px; border:3px solid var(--ink);
+    border-radius:999px; transform:rotate(5deg)}
+  .fighters{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px; align-items:center}
+  .fighters img{width:100%; height:auto; border:4px solid var(--ink); border-radius:18px;
+    box-shadow:0 0 0 5px var(--white), 0 0 0 9px var(--ink)}
+
+  /* ---------- 画面 ---------- */
+  .shots{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:26px; margin:10px 0 0; padding:0; list-style:none}
+  .shots figure{margin:0}
+  .shots img{width:100%; height:auto; border:3px solid var(--ink); border-radius:14px; box-shadow:5px 5px 0 var(--ink); background:var(--navy)}
+  .shots figcaption{margin-top:10px; font-size:14.5px; font-weight:600}
+
+  /* ---------- くわしく ---------- */
+  .panel{background:var(--white); border:3px solid var(--ink); border-radius:18px; box-shadow:6px 6px 0 var(--ink); overflow:hidden}
+  table{border-collapse:collapse; width:100%; font-size:15.5px}
+  th,td{padding:13px 16px; text-align:left; vertical-align:top; border-bottom:2px solid #EFE6D6}
+  tr:last-child th, tr:last-child td{border-bottom:0}
+  th{width:9.5em; font:400 16px/1.4 var(--display); letter-spacing:.02em; color:var(--ink)}
+  td a{font-weight:700}
+  @media (max-width:560px){
+    th,td{display:block; width:auto; border-bottom:0}
+    th{padding-bottom:0}
+    tr{display:block; border-bottom:2px solid #EFE6D6}
+    tr:last-child{border-bottom:0}
   }
-  a{color:var(--sun)}
-  .wrap{max-width:1040px; margin-inline:auto; padding-inline:20px}
 
-  /* studio bar */
-  .bar{ position:sticky; top:0; z-index:9; backdrop-filter:blur(10px);
-        background:rgba(12,7,22,.78); border-bottom:1px solid var(--line) }
-  .bar .wrap{ display:flex; align-items:center; gap:11px; height:58px }
-  .bar img{ width:30px; height:30px; display:block; border:2px solid #F3EFFA;
-             image-rendering:auto }
-  .bar .home{ font-size:14px; letter-spacing:.14em; font-weight:700;
-              color:#F3EFFA; text-decoration:none }
-  .bar nav{ margin-left:auto; font-size:14px }
-  .bar nav a{ color:var(--dim); text-decoration:none }
-  .bar nav a:hover{ color:#fff }
+  /* ---------- フッター（白黒に戻る） ---------- */
+  footer{background:#000; color:#fff; border-top:4px solid var(--ink); padding:36px 0 60px; font-size:14px}
+  footer nav{display:flex; flex-wrap:wrap; gap:8px 18px; margin-bottom:16px}
+  footer a{color:#fff; text-decoration:none; border-bottom:1px solid #fff; padding:6px 0; display:inline-block}
+  footer a:hover{background:#fff; color:#000}
+  .ja{margin:18px 0 0; padding-top:16px; border-top:1px dashed #fff; line-height:1.8}
+  .copy{font:400 10px/1.8 var(--px); margin-top:18px}
 
-  /* ---- hero ---- */
-  header{
-    position:relative; overflow:hidden; text-align:center;
-    padding:22px 0 56px;
-    background:
-      radial-gradient(1200px 460px at 50% -8%, rgba(232,70,124,.42), transparent 62%),
-      radial-gradient(1000px 420px at 84% 8%, rgba(60,180,155,.34), transparent 60%),
-      var(--ink);
-  }
-  header img.banner{ width:100%; max-width:1040px; display:block; margin:0 auto -8px }
-  h1{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0) }
-  .tag{ font-size:clamp(19px,3.4vw,30px); font-weight:800; letter-spacing:.02em; margin:8px 0 6px }
-  .sub{ color:var(--dim); margin:0 0 30px }
-  .cta{
-    display:inline-block; padding:15px 34px; border-radius:999px; text-decoration:none;
-    font-weight:800; letter-spacing:.03em; color:#1A0B14;
-    background:linear-gradient(135deg,var(--sun),#FFB03F);
-    box-shadow:0 10px 30px rgba(255,178,63,.28);
-    border:2px solid transparent;
-  }
-  .cta{ margin:6px 5px }
-  .cta.ghost{
-    background:transparent; color:#F3EFFA; border:2px solid var(--line);
-    box-shadow:none;
-  }
-  .getnote{ margin:14px auto 0; max-width:30rem; color:var(--dim); font-size:13.5px }
-  .badges{ margin-top:26px; color:var(--dim); font-size:14px }
-  .badges span{ display:inline-block; margin:0 10px }
-
-  /* ---- sections ---- */
-  section{ padding:64px 0; border-top:1px solid var(--line) }
-  h2{ font-size:clamp(21px,3vw,28px); margin:0 0 10px; letter-spacing:.01em }
-  .lead{ color:var(--dim); margin:0 0 30px; max-width:62ch }
-
-  video{ width:100%; border-radius:14px; border:1px solid var(--line); display:block; background:#000 }
-
-  .shots{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px }
-  .shots img{ width:100%; border-radius:12px; border:1px solid var(--line); display:block }
-
-  .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(232px,1fr)); gap:16px; margin-top:8px }
-  .card{ background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:20px 22px }
-  .card h3{ margin:0 0 8px; font-size:16px; letter-spacing:.06em; text-transform:uppercase }
-  .card h3.p{ color:var(--pink) } .card h3.t{ color:var(--teal) } .card h3.s{ color:var(--sun) }
-  .card p{ margin:0; color:var(--dim); font-size:15px }
-
-  table{ border-collapse:collapse; width:100%; font-size:15px }
-  td{ padding:11px 4px; border-bottom:1px solid var(--line); vertical-align:top }
-  td:first-child{ color:var(--dim); width:12em; white-space:nowrap }
-
-  footer{ padding:44px 0 66px; border-top:1px solid var(--line); color:var(--dim); font-size:14px }
-  footer a{ color:var(--dim) }
-  .jp{ margin-top:14px; padding-top:14px; border-top:1px dashed var(--line) }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} .btn:active{transform:none}}
 </style>
 </head>
 <body>
 
 <div class="bar">
   <div class="wrap">
-    <a href="../"><img src="../img/osho-face-sm.png" alt="OSHO GAMES" width="96" height="96"></a>
+    <a href="../" aria-label="OSHO GAMES — home"><img class="face" src="../img/osho-face-sm.png" alt="" width="96" height="96"></a>
     <a class="home" href="../">OSHO GAMES</a>
-    <nav><a href="../#games">All games</a></nav>
+    <nav>
+      <a class="wide" href="#modes">Modes</a>
+      <a class="wide" href="#details">Details</a>
+      <a href="../#games">All games</a>
+    </nav>
   </div>
 </div>
 
-<header>
+<header class="hero">
   <div class="wrap">
-    <h1>POP CLASH</h1>
-    <img class="banner" src="img/banner.jpg" alt="POP CLASH — the eight fighters">
+    <h1 class="sr">POP CLASH</h1>
+    <p class="sticker">NEW IN VERSION 2.0</p>
+    <img class="banner" src="img/banner.jpg" alt="POP CLASH — the eight fighters" width="1200" height="600">
     <p class="tag">Eight fighters. One arena.</p>
     <p class="sub">Knock everyone else off the stage.</p>
-    <a class="cta" href="solanadappstore://details?id=io.popclash.game">Get it on Solana dApp Store</a>
-    <a class="cta ghost" href="#video">Watch it play</a>
-    <a class="cta ghost" href="#modes">What's in it</a>
-    <p class="getnote">Free, on Solana Seeker and Saga. Open this page on your phone to jump
-    straight to the listing — or search for POP CLASH in the dApp Store.</p>
-    <p class="badges">
-      <span>No ads</span>·<span>No purchases</span>·<span>Plays offline</span>·<span>Weekly ranking</span>·<span>8 languages</span>
-    </p>
+    <div class="ctas">
+      <a class="btn get" href="solanadappstore://details?id=io.popclash.game">Get it on the Solana dApp Store</a>
+      <a class="btn" href="#video">Watch it play</a>
+    </div>
+    <p class="note">Free on Solana Seeker and Saga. The store link opens only on those phones — anywhere else, search for POP CLASH in the dApp Store.
+      <!-- V2.0 が承認されたら、下の span を消す（2026-10-04 運営） -->
+      <span id="rollout"><br><b>Version 2.0 is on its way to the store. Until it arrives, the store has version 1.1.</b></span></p>
+    <ul class="chips" aria-label="At a glance">
+      <li>Free</li><li>No ads</li><li>No purchases</li><li>Plays offline</li><li>8 languages</li>
+    </ul>
   </div>
 </header>
 
-<section id="video">
+<section id="video" class="dots">
   <div class="wrap">
-    <h2>Twenty seconds of it</h2>
-    <p class="lead">Four fighters, one stage, no health bars. Damage builds a percentage —
-      the higher yours climbs, the further the next hit sends you.</p>
-    <video src="gameplay.mp4" controls muted loop playsinline poster="img/03-battle.jpg"></video>
+    <h2><span>See it move</span></h2>
+    <p class="lead">Four fighters, one stage, no health bars. Damage builds a percentage — the higher it
+      climbs, the further the next hit sends you flying.</p>
+    <div class="screen">
+      <video src="gameplay.mp4" controls muted loop playsinline preload="none" poster="img/01-battle.jpg"
+             width="1920" height="1080"></video>
+    </div>
   </div>
 </section>
 
-<section id="modes">
+<section id="modes" class="mint">
   <div class="wrap">
-    <h2>What's in it</h2>
-    <div class="grid">
-      <div class="card">
-        <h3 class="p">Eight fighters</h3>
-        <p>Two humans, two robots, two beasts, two monsters. Four unique specials each —
-           thirty-two in all, and none of them play alike.</p>
+    <h2><span>What's in it</span></h2>
+    <p class="lead">Everything is drawn like a comic book now: BAM! and POW! on the big hits, and a POP! for every knockout.</p>
+    <div class="cards">
+      <div class="card" style="--c:var(--pink)">
+        <h3>Versus</h3>
+        <p>You against up to three CPU fighters at four difficulty levels, on four stages. Stocks from one to five, or endless.</p>
       </div>
-      <div class="card">
-        <h3 class="t">Quest mode</h3>
-        <p>Four chapters, sixteen fights, four bosses. Every node tells you what it pays
-           before you commit, and bosses drop rare gear.</p>
+      <div class="card" style="--c:var(--p1)">
+        <h3>Quest</h3>
+        <p>Solo: four chapters, boss fights, gear and skills.</p>
       </div>
-      <div class="card">
-        <h3 class="s">Gear &amp; skills</h3>
-        <p>Ninety-six pieces of equipment that show up on the character, not just in the
-           stats. Level a special and it changes, not just hits harder.</p>
+      <div class="card" style="--c:var(--p3)">
+        <span class="new">NEW</span>
+        <h3>Daily mini-game</h3>
+        <p>A new game every day: SKY HIGH (launch POPPY as far as you can) and BALLOON POP (pop ten balloons against the clock) take turns. The same fighter for everyone that day.</p>
       </div>
-      <div class="card">
-        <h3 class="p">Versus</h3>
-        <p>Up to four fighters in a match: you against up to three CPU fighters at four
-           difficulty levels. Stocks from one to five, or endless.</p>
+      <div class="card" style="--c:var(--mint)">
+        <h3>Weekly challenge</h3>
+        <p>The same fighter, the same eight opponents and the same stages for everyone that week. Beat as many as you can, earn a bronze, silver or gold medal, and race this week's bot. Send a friend a challenge code for the same eight fights.</p>
+      </div>
+      <div class="card" style="--c:var(--fx)">
+        <h3>Weekly ranking</h3>
+        <p>Ordered by fighters beaten, then time. Every entry is replayed on our server before it is listed, and you can watch the top run. Seeker owners also get a board of their own.</p>
+        <span class="opt">Optional — the whole game plays without it.</span>
+      </div>
+      <div class="card" style="--c:var(--p4)">
+        <span class="new">NEW</span>
+        <h3>Fighter records</h3>
+        <p>Ten goals for each fighter. Unlock a name tag, an alternate color and a gold frame — looks only, never power.</p>
+      </div>
+      <div class="card" style="--c:var(--p2)">
+        <h3>Controls</h3>
+        <p>One stick and four buttons — attack, special, guard and jump. Change their size, opacity and position, or switch to a left-handed layout, and try it in the practice room. Vibration can be turned off.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section>
+<section id="fighters" class="dots">
   <div class="wrap">
-    <h2>Screens</h2>
-    <div class="shots">
-      <img src="img/01-title.jpg" alt="Title screen" loading="lazy">
-      <img src="img/02-fighters.jpg" alt="Choosing a fighter" loading="lazy">
-      <img src="img/05-quest.jpg" alt="Quest map with rewards" loading="lazy">
-      <img src="img/06-boss.jpg" alt="Boss fight" loading="lazy">
-      <img src="img/07-gear.jpg" alt="Gear and skills" loading="lazy">
-      <img src="img/03-battle.jpg" alt="Four-way battle" loading="lazy">
+    <h2><span>Eight fighters</span></h2>
+    <div class="fighters">
+      <img src="img/square-fighters.jpg" alt="RONIN, VOLT, PISTON and BLIP" width="720" height="522" loading="lazy">
+      <img src="img/square2-fighters.jpg" alt="FANG, TUSK, GLOOM and HORN" width="720" height="522" loading="lazy">
     </div>
+    <p class="lead">Two humans, two robots, two beasts and two monsters — RONIN, VOLT, PISTON, BLIP, FANG, TUSK,
+      GLOOM and HORN. Each fighter's specials have a look of their own: ink, lightning, steam, pixels, claws,
+      rock, slime and fire.</p>
   </div>
 </section>
 
-<section>
+<section id="screens" class="mint">
   <div class="wrap">
-    <h2>The details</h2>
-    <table>
-      <tr><td>Platform</td><td>Android 7.0 and up · landscape</td></tr>
-      <tr><td>Get it</td><td><a href="solanadappstore://details?id=io.popclash.game">Solana dApp Store</a> — on a Seeker or Saga device.</td></tr>
-      <tr><td>Price</td><td>Free. No ads, no in-app purchases, no timers.</td></tr>
-      <tr><td>Network</td><td>Optional. The whole game plays in airplane mode. Only the weekly ranking uses the internet, and only when you submit or view it.</td></tr>
-      <tr><td>Wallet</td><td>Optional. Connecting a Solana wallet is never required, costs nothing and never asks for a transaction.</td></tr>
-      <tr><td>Data</td><td>One save file stays on your device. Nothing is sent unless you submit
-        to the optional weekly ranking. <a href="privacy.html">Privacy policy</a></td></tr>
-      <tr><td>Languages</td><td>English · 日本語 · Español · 中文 · 한국어 · Français · Deutsch · Português</td></tr>
-      <tr><td>Controls</td><td>One stick, three buttons. Built for thumbs.</td></tr>
-      <tr><td>Contact</td><td><a href="mailto:ai.hitori.osho@gmail.com">ai.hitori.osho@gmail.com</a></td></tr>
-    </table>
+    <h2><span>Screens</span></h2>
+    <ul class="shots">
+      <li><figure><img src="img/01-battle-640.jpg" srcset="img/01-battle-640.jpg 640w, img/01-battle.jpg 1280w" sizes="(max-width:700px) 100vw, 520px" alt="A four-fighter match on BUBBLE PARK, with a WHAM! on the hit" width="1280" height="720" loading="lazy"><figcaption>A four-fighter match on BUBBLE PARK</figcaption></figure></li>
+      <li><figure><img src="img/02-fighters-640.jpg" srcset="img/02-fighters-640.jpg 640w, img/02-fighters.jpg 1280w" sizes="(max-width:700px) 100vw, 520px" alt="Choosing a fighter" width="1280" height="720" loading="lazy"><figcaption>Choosing a fighter</figcaption></figure></li>
+      <li><figure><img src="img/03-specials-640.jpg" srcset="img/03-specials-640.jpg 640w, img/03-specials.jpg 1280w" sizes="(max-width:700px) 100vw, 520px" alt="RONIN's special, SHING!" width="1280" height="720" loading="lazy"><figcaption>RONIN's special: SHING!</figcaption></figure></li>
+      <li><figure><img src="img/04-knockout-640.jpg" srcset="img/04-knockout-640.jpg 640w, img/04-knockout.jpg 1280w" sizes="(max-width:700px) 100vw, 520px" alt="A knockout POP! on CANDY TOWER" width="1280" height="720" loading="lazy"><figcaption>A knockout POP! on CANDY TOWER</figcaption></figure></li>
+      <li><figure><img src="img/05-moon-disco-640.jpg" srcset="img/05-moon-disco-640.jpg 640w, img/05-moon-disco.jpg 1280w" sizes="(max-width:700px) 100vw, 520px" alt="MOON DISCO, where gravity drops inside the spotlight" width="1280" height="720" loading="lazy"><figcaption>MOON DISCO: step into the spotlight and gravity drops</figcaption></figure></li>
+      <li><figure><img src="img/06-daily-minigame-640.jpg" srcset="img/06-daily-minigame-640.jpg 640w, img/06-daily-minigame.jpg 1280w" sizes="(max-width:700px) 100vw, 520px" alt="The daily mini-game SKY HIGH" width="1280" height="720" loading="lazy"><figcaption>Daily mini-game: SKY HIGH</figcaption></figure></li>
+      <li><figure><img src="img/07-weekly-challenge-640.jpg" srcset="img/07-weekly-challenge-640.jpg 640w, img/07-weekly-challenge.jpg 1280w" sizes="(max-width:700px) 100vw, 520px" alt="The weekly challenge screen with medals and this week's bot" width="1280" height="720" loading="lazy"><figcaption>Weekly challenge: medals and this week's bot</figcaption></figure></li>
+      <li><figure><img src="img/08-title-640.jpg" srcset="img/08-title-640.jpg 640w, img/08-title.jpg 1280w" sizes="(max-width:700px) 100vw, 520px" alt="The title screen" width="1280" height="720" loading="lazy"><figcaption>The title screen</figcaption></figure></li>
+    </ul>
+  </div>
+</section>
+
+<section id="details" class="dots">
+  <div class="wrap">
+    <h2><span>The details</span></h2>
+    <div class="panel">
+      <table>
+        <tr><th>Platform</th><td>Android — Solana Seeker and Saga. Landscape.</td></tr>
+        <tr><th>Get it</th><td><a href="solanadappstore://details?id=io.popclash.game">Solana dApp Store</a> — on a Seeker or Saga.</td></tr>
+        <tr><th>Price</th><td>Free. No ads, no in-app purchases, no timers. Everything is unlocked by playing.</td></tr>
+        <tr><th>Network</th><td>Plays offline, even in airplane mode. Only the optional weekly ranking uses the internet — when you open it, submit to it, or watch the top run.</td></tr>
+        <tr><th>Wallet</th><td>Optional. Connecting a Solana wallet costs nothing and never asks for a transaction. You can connect it the moment you submit to the ranking.</td></tr>
+        <tr><th>Data</th><td>One save file stays on your device. Nothing is sent unless you submit to the optional weekly ranking. <a href="privacy.html">Privacy policy</a></td></tr>
+        <tr><th>Languages</th><td>English · 日本語 · Español · 中文 · 한국어 · Français · Deutsch · Português</td></tr>
+        <tr><th>Contact</th><td><a href="mailto:ai.hitori.osho@gmail.com">ai.hitori.osho@gmail.com</a></td></tr>
+      </table>
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    © 2026 <a href="../">OSHO GAMES</a> · POP CLASH · <a href="privacy.html">Privacy policy</a> · <a href="terms.html">Terms of use</a>
-    <div class="jp">
-      A platform fighter where eight fighters knock each other off the stage.
-      Quest mode, boss fights, gear and skills. No ads, no purchases — the whole
-      game plays offline. Connect a Solana wallet if you want to put your name on
-      the weekly ranking; nothing is locked behind it.
-    </div>
+    <nav>
+      <a href="../">OSHO GAMES</a>
+      <a href="privacy.html">Privacy policy</a>
+      <a href="terms.html">Terms of use</a>
+      <a href="mailto:ai.hitori.osho@gmail.com">Contact</a>
+    </nav>
+    <p class="ja" lang="ja">8人で1つのアリーナを奪い合う、ステージ外へ吹っ飛ばす対戦アクション。HP は無く、ダメージは％でたまり、数字が高いほど遠くへ飛ばされます。ゲームはすべてオフラインで遊べます。広告なし・課金なし。ウォレットとランキングは任意です。</p>
+    <p class="copy">© 2026 OSHO GAMES</p>
   </div>
 </footer>
 
