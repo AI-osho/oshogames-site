@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.popclash.game",
+      "sha256_cert_fingerprints": [
+        "BC:22:24:35:A6:0D:16:AE:06:27:E8:77:B3:0C:E3:AC:9C:E6:52:51:C6:3C:A5:4F:27:42:3E:4A:E4:88:C1:F4"
+      ]
+    }
+  }
+]
