@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><!-- until-approval: 承認の日に、この行は消える（tools/site_switch.py approve） -->
+<title>CUBE SQUAD — Privacy Policy</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { margin:0; padding:2.2rem 1.2rem 4rem; font:16px/1.7 -apple-system,BlinkMacSystemFont,
+         "Segoe UI","Helvetica Neue",Arial,"Hiragino Sans","Noto Sans JP",sans-serif;
+         max-width:44rem; margin-inline:auto; color:#1c1b22; background:#fff; }
+  @media (prefers-color-scheme: dark){ body{ color:#e9e7f0; background:#14121c; } }
+  h1 { font-size:1.7rem; margin:0 0 .2rem; }
+  h2 { font-size:1.12rem; margin:2.2rem 0 .5rem; }
+  h3 { font-size:1rem; margin:1.4rem 0 .3rem; }
+  .sub { color:#7a7788; margin:0 0 2rem; }
+  .box { border:2px solid #F3A502; border-radius:12px; padding:1rem 1.2rem; margin:1.4rem 0;
+         font-weight:600; }
+  hr { border:0; border-top:1px solid #d9d7e0; margin:3rem 0 1.6rem; }
+  @media (prefers-color-scheme: dark){ .sub{ color:#9b98ab; } }
+  code { background:rgba(127,127,127,.16); padding:.1em .35em; border-radius:4px; }
+  table { border-collapse:collapse; width:100%; margin:.8rem 0 1.2rem; font-size:.95rem; }
+  th,td { border:1px solid #d9d7e0; padding:.45rem .6rem; text-align:left; vertical-align:top; }
+  th { background:rgba(127,127,127,.10); font-weight:600; }
+  @media (prefers-color-scheme: dark){ th,td{ border-color:#3a3748; } }
+  ul { padding-left:1.2rem; }
+  li { margin:.3rem 0; }
+</style>
+</head>
+<body>
+
+<p style="margin:0 0 1.4rem"><a href="index.html">← CUBE SQUAD</a></p>
+
+<h1>CUBE SQUAD — Privacy Policy</h1>
+<p class="sub">Last updated: 12 October 2026 (version 1.0)</p>
+
+<div class="box">CUBE SQUAD plays entirely offline. There is no account and no
+sign-in. Connecting a Solana wallet is optional and is used for one thing only:
+checking whether you own a Seeker, to unlock a free perk weapon. Everything else
+in the game works with the network switched off.</div>
+
+<h2>What the app collects on its own</h2>
+<p>Nothing. There is no analytics, no advertising, no crash reporting and no
+third-party SDK that transmits data. The game engine's diagnostic data and
+hardware statistics are turned off. The app declares internet access and
+network-state access, and uses them only for the optional wallet connection and
+Seeker check described below (on Android, even talking to a wallet app on the same
+device counts as internet access). Nothing is sent anywhere unless you choose to
+connect a wallet.</p>
+
+<h2>What the app stores on your device</h2>
+<p>One save file, held in the app's own private storage. It contains your
+progress (your furthest point and best score, whether you have cleared the second
+loop, how many runs you have played, the last day you played, the difficulty you
+chose and whether you have seen the first-time guide), your coins and upgrades,
+your partners and their levels, the outfits you own and wear, your weekly
+challenge progress and badges, and your settings (language, graphics quality and
+volume). Weapons and rank are earned within a single run and are not saved.</p>
+<p>The app does not keep play logs or performance records on your device.</p>
+<p>If you connect a wallet and the Seeker check succeeds, the app also stores the
+result on your device: your wallet's public address, the address of the Seeker
+Genesis Token and the time of the check, together with whether you have seen the
+perk notice and whether you chose to start runs with the perk weapon.</p>
+<p>None of this leaves your device through the app. Uninstalling the app removes
+it. Depending on your device settings, Android may include the app's data in your
+own device backup (for example, a backup to your Google account, or a transfer to
+a new phone). That backup is handled by Android and your Google account; it never
+reaches OSHO GAMES.</p>
+
+<h2>Connecting a wallet (optional)</h2>
+<p>Connecting uses the Solana Mobile Wallet Adapter, which talks to a wallet app
+<strong>installed on the same device</strong>. We never see your private key or
+seed phrase. The app never asks your wallet to approve a transaction, spend
+anything, or write to any blockchain. The authorisation your wallet gives the app
+is kept only in memory while the app is open, and the app does not reconnect to
+your wallet automatically next time.</p>
+
+<h2>Seeker owner perk (optional)</h2>
+<p>When you connect a wallet, the app asks Solana's public RPC endpoint
+(<code>api.mainnet-beta.solana.com</code>, or <code>api.mainnet.solana.com</code>
+if that cannot be reached) whether the wallet holds a Seeker Genesis Token. The
+first request sends the wallet's public address; the second sends the public
+addresses of the tokens found in that wallet (split into batches of 100 if there
+are many). This happens only if the check has not already been completed on that
+device. If the wallet holds a Seeker Genesis Token, the app asks your wallet to sign
+a short message (no transfer, no fee) to confirm that you own the wallet. The
+message names the game and the check, and contains a one-time random value and the
+time. The signature is checked on your device and is not sent anywhere. The result
+(token address, wallet address and the time of the check) is stored only on your
+device.</p>
+<p>A wallet's public address and its tokens are already public on the Solana
+blockchain. As with any request over the internet, the RPC service can see your
+device's IP address; it is operated by a third party, not by OSHO GAMES.</p>
+
+<h2>Who else receives anything</h2>
+<p>OSHO GAMES runs no server for this game and receives nothing from it. There is
+no analytics provider, no advertising network and no data broker. The only outside
+service the app contacts is the public Solana RPC service described above, and
+only when you connect a wallet.</p>
+
+<h2>Children</h2>
+<p>Played on its own, the game collects nothing, so it collects nothing from
+children. The Seeker owner perk requires a Solana wallet. There is no chat,
+messaging or other way for players to communicate.</p>
+
+<h2>Changes</h2>
+<p>If a future version collects anything not described here, this page will be
+updated before that version is released, and the change will be described here.</p>
+
+<h2>Contact</h2>
+<p>Questions about this policy:
+<a href="mailto:ai.hitori.osho@gmail.com">ai.hitori.osho@gmail.com</a></p>
+
+</body>
+</html>
