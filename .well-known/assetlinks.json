@@ -10,5 +10,17 @@
         "BC:22:24:35:A6:0D:16:AE:06:27:E8:77:B3:0C:E3:AC:9C:E6:52:51:C6:3C:A5:4F:27:42:3E:4A:E4:88:C1:F4"
       ]
     }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.osho.cubesquad",
+      "sha256_cert_fingerprints": [
+        "EE:2C:AD:72:65:B6:DD:D1:49:99:A3:F0:EB:39:31:C0:B2:BB:B9:32:7A:17:9A:9B:C0:8D:3A:1A:0F:6A:5C:C3"
+      ]
+    }
   }
 ]
