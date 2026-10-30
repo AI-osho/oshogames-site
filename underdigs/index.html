@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- ★承認の前の形: 検索よけ。店で承認された日に、この1行を消す（3つの頁とも） -->
+<meta name="robots" content="noindex">
+<title>UNDERDIGS — A dig-by-dig heist puzzle</title>
+<meta name="description" content="A 3D dig-by-dig heist puzzle for Android. Lead a crew of thieves through five areas beneath NEW BULLION CITY. The guard robots move only when you act. Every day a new Chain Vault is born from Solana's first block of the day.">
+<link rel="canonical" href="https://oshogames.com/underdigs/">
+<link rel="icon" href="img/icon-96.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta name="theme-color" content="#10131E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OSHO GAMES">
+<meta property="og:title" content="UNDERDIGS">
+<meta property="og:description" content="A dig-by-dig heist puzzle beneath NEW BULLION CITY. The guard robots move only when you act.">
+<meta property="og:url" content="https://oshogames.com/underdigs/">
+<meta property="og:image" content="https://oshogames.com/underdigs/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="UNDERDIGS — gold voxel title over four characters in a black, yellow, pink and cyan pop-art poster">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "UNDERDIGS",
+  "url": "https://oshogames.com/underdigs/",
+  "image": "https://oshogames.com/underdigs/img/og.jpg",
+  "description": "A 3D dig-by-dig heist puzzle. Lead a crew of thieves through five areas beneath NEW BULLION CITY; the guard robots move only when you act.",
+  "genre": "Puzzle",
+  "gamePlatform": "Android",
+  "operatingSystem": "Android",
+  "applicationCategory": "GameApplication",
+  "inLanguage": ["en", "ja", "zh-Hans", "es"],
+  "publisher": { "@type": "Organization", "name": "OSHO GAMES", "url": "https://oshogames.com/" }
+}
+</script>
+<style>
+  /* 書体はサイト内に同梱（外部 CDN に依存しない）
+     Press Start 2P — SIL Open Font License 1.1 */
+  @font-face{font-family:"Press Start 2P";font-style:normal;font-weight:400;font-display:swap;
+    src:url("../fonts/press-start-2p.woff2") format("woff2")}
+
+  /* ============================================================
+     UNDERDIGS — ロゴと同じ組み（10/15 本人の決定の色）
+     ・金 #FFC93C ＋ ピンク #FF3D8B・地は紺 #10131E
+     ・ヒーローはタイトル画面と同じ夜の青（#001536）
+     上の帯とフッターはスタジオの面なので白黒のまま。
+     ★店に出た後: 「承認の後」の印（data-after）の物を出し、「出る前」（data-before）の物を消す
+     ============================================================ */
+  :root{
+    --gold:#FFC93C; --pink:#FF3D8B; --navy:#10131E; --night:#0B1530; --deep:#001536; --cell:#151A29;
+    --bone:#F2F4FA; --muted:#B9C0D4;
+    --px:"Press Start 2P", ui-monospace, monospace;
+    --body:system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  }
+  [hidden]{display:none !important}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; background:var(--navy)}
+  body{margin:0; background:var(--navy); color:var(--bone); font:16px/1.7 var(--body);
+       -webkit-text-size-adjust:100%}
+  img{max-width:100%; display:block}
+  a{color:inherit}
+  .wrap{max-width:1080px; margin-inline:auto; padding-inline:20px}
+  .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+  /* ---------- スタジオの帯（白黒） ---------- */
+  .bar{position:sticky; top:0; z-index:20; background:#000; color:#fff; border-bottom:3px solid #fff}
+  .bar .wrap{display:flex; align-items:center; gap:12px; height:60px}
+  .bar .face{flex:0 0 auto; width:40px; height:40px; border:2px solid #fff; image-rendering:auto}
+  .bar a:first-child{flex:0 0 auto; line-height:0}
+  .bar .home{font:400 11px/1 var(--px); color:#fff; text-decoration:none; white-space:nowrap}
+  .bar nav{margin-left:auto; display:flex; gap:6px}
+  .bar nav a{font:400 10px/1 var(--px); color:#fff; text-decoration:none; padding:12px 8px}
+  .bar nav a:hover{background:#fff; color:#000}
+  @media (max-width:560px){ .bar nav .wide{display:none} }
+
+  /* ---------- ヒーロー（タイトル画面の夜の青・うすいボクセルの升目） ---------- */
+  .hero{position:relative; overflow:hidden; text-align:center; padding:34px 0 56px;
+    background:
+      radial-gradient(55% 60% at 85% 10%, rgba(255,61,139,.16), transparent 70%),
+      radial-gradient(60% 60% at 10% 90%, rgba(255,201,60,.10), transparent 70%),
+      linear-gradient(var(--deep), var(--night))}
+  .hero:before{content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+                     linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size:24px 24px}
+  .hero .wrap{position:relative}
+  .banner{width:100%; max-width:900px; height:auto; margin:0 auto; display:block}
+  .tag{margin:26px 0 0; font:400 clamp(14px,3vw,24px)/1.6 var(--px); color:var(--gold);
+    text-shadow:3px 3px 0 #000}
+  .sub{margin:16px auto 0; max-width:40rem; font-size:17.5px; line-height:1.6}
+  .ctas{display:flex; flex-wrap:wrap; justify-content:center; gap:16px; margin-top:28px}
+  .btn{display:inline-block; font:400 12px/1.4 var(--px); text-decoration:none; color:#000;
+    background:var(--gold); padding:16px 20px; border:3px solid #000;
+    box-shadow:5px 5px 0 var(--pink), 5px 5px 0 3px #000}
+  .btn.alt{background:var(--bone)}
+  .btn.soon{background:#2A3045; color:var(--gold); cursor:default; box-shadow:5px 5px 0 #000}
+  a.btn:active{transform:translate(4px,4px); box-shadow:1px 1px 0 var(--pink), 1px 1px 0 3px #000}
+  .note{max-width:36rem; margin:24px auto 0; font-size:14.5px; line-height:1.6;
+    background:rgba(0,0,0,.55); border:2px solid var(--gold); padding:10px 14px}
+  .chips{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; list-style:none; padding:0; margin:22px 0 0}
+  .chips li{font:400 9.5px/1 var(--px); background:#000; color:var(--gold); border:2px solid var(--gold); padding:9px 10px}
+
+  /* ---------- セクション ---------- */
+  section{padding:58px 0 64px; border-top:4px solid #000}
+  .glow{background:radial-gradient(70% 90% at 50% 0%, rgba(0,21,54,.95), transparent 75%), var(--navy)}
+  .dark{background:var(--navy)}
+  .chain{background:radial-gradient(60% 80% at 80% 0%, rgba(255,61,139,.14), transparent 70%), var(--night)}
+  h2{margin:0 0 22px}
+  h2 span{display:inline-block; font:400 clamp(14px,2.4vw,20px)/1.35 var(--px); color:#000;
+    background:var(--gold); padding:12px 16px 10px; border:3px solid #000;
+    box-shadow:6px 6px 0 var(--pink), 6px 6px 0 3px #000}
+  .lead{max-width:62ch; margin:0 0 30px; font-size:17px}
+
+  .story p{max-width:64ch; margin:0 0 18px; font-size:17.5px; line-height:1.85}
+  .cry{margin:30px 0 0; font:400 clamp(11px,1.9vw,14px)/2.1 var(--px); color:var(--gold);
+    text-shadow:2px 2px 0 #000}
+
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px}
+  .card{background:var(--cell); border:3px solid #000; padding:0 18px 18px;
+    box-shadow:0 0 0 2px var(--gold), 7px 7px 0 2px var(--pink)}
+  .card h3{margin:0 -18px 14px; padding:13px 18px 11px; font:400 11.5px/1.6 var(--px); color:#000;
+    background:var(--gold); border-bottom:3px solid #000}
+  .card p{margin:0; font-size:15.5px; line-height:1.65}
+
+  .steps{counter-reset:s; list-style:none; margin:0 0 30px; padding:0; display:grid; gap:14px; max-width:68ch}
+  .steps li{position:relative; padding:12px 14px 12px 58px; background:var(--cell); border:2px solid #000;
+    box-shadow:0 0 0 2px rgba(255,201,60,.55); font-size:16px; line-height:1.65}
+  .steps li:before{counter-increment:s; content:counter(s); position:absolute; left:12px; top:12px;
+    width:32px; height:32px; display:grid; place-items:center; font:400 12px/1 var(--px);
+    background:var(--pink); color:#000; border:2px solid #000}
+  .small{font-size:14.5px; color:var(--muted); max-width:68ch; margin:0}
+  .small a{color:var(--gold)}
+
+  .shots{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:26px; list-style:none; margin:0; padding:0}
+  @media (max-width:700px){ .shots{grid-template-columns:1fr; gap:22px} }
+  .shots figure{margin:0}
+  .shots img{width:100%; height:auto; aspect-ratio:2400/1080; background:#000; border:3px solid #000;
+    box-shadow:0 0 0 2px var(--gold), 6px 6px 0 2px var(--pink)}
+  .shots figcaption{margin-top:14px; font-size:14px; line-height:1.5; color:var(--muted)}
+
+  .panel{background:var(--cell); border:3px solid #000; box-shadow:0 0 0 2px var(--gold), 8px 8px 0 2px var(--pink)}
+  table{border-collapse:collapse; width:100%; font-size:15.5px}
+  th,td{padding:13px 16px; text-align:left; vertical-align:top; border-bottom:1px solid rgba(255,201,60,.25)}
+  tr:last-child th, tr:last-child td{border-bottom:0}
+  th{width:9em; font:400 10.5px/1.6 var(--px); color:var(--gold); padding-top:17px}
+  td a{color:var(--gold); font-weight:700}
+  @media (max-width:560px){
+    th,td{display:block; width:auto; border-bottom:0}
+    th{padding-bottom:0}
+    tr{display:block; border-bottom:1px solid rgba(255,201,60,.25)}
+    tr:last-child{border-bottom:0}
+  }
+
+  /* ---------- フッター（白黒に戻る） ---------- */
+  footer{background:#000; color:#fff; border-top:3px solid #fff; padding:36px 0 60px; font-size:14px}
+  footer nav{display:flex; flex-wrap:wrap; gap:8px 18px; margin-bottom:16px}
+  footer a{color:#fff; text-decoration:none; border-bottom:1px solid #fff; padding:6px 0; display:inline-block}
+  footer a:hover{background:#fff; color:#000}
+  .ja{margin:18px 0 0; padding-top:16px; border-top:1px dashed #fff; line-height:1.8}
+  .copy{font:400 10px/1.8 var(--px); margin-top:18px}
+
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} a.btn:active{transform:none}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <a href="../" aria-label="OSHO GAMES — home"><img class="face" src="../img/osho-face-sm.png" alt="" width="96" height="96"></a>
+    <a class="home" href="../">OSHO GAMES</a>
+    <nav>
+      <a class="wide" href="#play">Play</a>
+      <a class="wide" href="#chain">Chain Vault</a>
+      <a href="../#games">All games</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <h1 class="sr">UNDERDIGS</h1>
+    <img class="banner" src="img/banner.jpg" alt="UNDERDIGS — gold voxel title over four characters in a black, yellow, pink and cyan pop-art poster" width="1200" height="600">
+    <p class="tag">The robots move only when you act.</p>
+    <p class="sub">A 3D dig-by-dig heist puzzle deep beneath NEW BULLION CITY. Every move is yours to plan.</p>
+    <div class="ctas">
+      <span class="btn soon" data-before>Coming soon to the Solana dApp Store</span>
+      <a class="btn" data-after hidden href="solanadappstore://details?id=com.osho.underdigs">Get it on the Solana dApp Store</a>
+      <a class="btn alt" href="#screens">See the screens</a>
+    </div>
+    <p class="note" data-after hidden>For Solana Seeker. The store link opens only on a Seeker — anywhere else, search for UNDERDIGS in the dApp Store.</p>
+    <ul class="chips" aria-label="At a glance">
+      <li>Android</li><li>Puzzle</li><li>Voxel</li><li>100 missions</li><li>4 languages</li><li>Story plays offline</li>
+    </ul>
+  </div>
+</header>
+
+<section id="story" class="glow">
+  <div class="wrap story">
+    <h2><span>The story</span></h2>
+    <p>NEW BULLION CITY is built on gold, and the gold belongs to a few very loud people. Underneath it all — in the subway, the old flood tunnels, an underground mall, a data vault and a vain billionaire's private base — the city's treasures sit behind locks, guard robots and a great deal of showing off.</p>
+    <p>UNDERDIGS are a small crew of one-of-a-kind thieves. Guided by Granny Kiyo's voice on the radio, they dig in from below, take the treasure piece by piece and follow the trail of five fragments toward the secret of the founder's first vault.</p>
+    <p class="cry">Dig in. Steal it back. Nobody gets hurt.</p>
+  </div>
+</section>
+
+<section id="play" class="dark">
+  <div class="wrap">
+    <h2><span>How it plays</span></h2>
+    <p class="lead">Each mission is a small 3D room seen from above. Dig through the dirt one block at a time, climb, carry the parts back out — and time it so the guard robots never catch you. They only move when you act, so there is always time to think.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>Five areas, 100 missions</h3>
+        <p>Twenty missions in each area: the main heists, harder back-room jobs and a showdown at the end.</p>
+      </div>
+      <div class="card">
+        <h3>Five villain showdowns</h3>
+        <p>Every area ends with a showdown in three acts against a villain with a signature trick of their own.</p>
+      </div>
+      <div class="card">
+        <h3>A crew with skills</h3>
+        <p>Switch between crew members, and use each one's special move at the right moment.</p>
+      </div>
+      <div class="card">
+        <h3>Puzzle gadgets</h3>
+        <p>Pressure plates and doors, mirrors and light locks, pneumatic tubes, cracked floors and more.</p>
+      </div>
+      <div class="card">
+        <h3>Undo, hints and a notebook</h3>
+        <p>Take back any move or start over. Hints come in three steps — a word from Granny Kiyo, the key spots, then a demo (five demos a day; recording a Chain Vault result refills them) — and your notebook keeps the clues.</p>
+      </div>
+      <div class="card">
+        <h3>The hideout museum</h3>
+        <p>Put the stolen parts back together and show them off in your own museum.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="chain" class="chain">
+  <div class="wrap">
+    <h2><span>The Chain Vault</span></h2>
+    <p class="lead">Once a day, the whole world gets the same new vault. It is built from Solana's first block of the day, so nobody knows what is inside before it opens — not even us.</p>
+    <ol class="steps">
+      <li>Every day at 00:00 UTC (9:00 in Japan), a new Chain Vault is born from the first Solana block of the day.</li>
+      <li>Crack it. Then, if you like, carve your record into Solana from your own wallet. Your move count goes on the chain first; your actual moves stay sealed until the vault closes, so nobody can copy them.</li>
+      <li>Rankings are built on your own device by reading and checking the records on Solana. There is no OSHO GAMES server in between.</li>
+      <li>Watch replays of the best solutions, and wear your thief's crest — a picture drawn from your wallet address.</li>
+      <li>Seeker owners also get a weekly Seeker vault and the ◆ mark.</li>
+    </ol>
+    <p class="small">Connecting a wallet is optional — the whole story plays without one. Recording costs a Solana network fee of about 0.000005 SOL, paid from your wallet; none of it goes to OSHO GAMES. There are no prizes and no tokens: only honour. Records on Solana are public and permanent. After the story, the last door in the museum opens with a free signature. Details: <a href="privacy.html">Privacy policy</a>.</p>
+  </div>
+</section>
+
+<section id="screens" class="glow">
+  <div class="wrap">
+    <h2><span>Screens</span></h2>
+    <ul class="shots">
+      <li><figure><img src="img/shots-v1/01-heist-640.jpg" srcset="img/shots-v1/01-heist-640.jpg 640w, img/shots-v1/01-heist-1280.jpg 1280w" sizes="(max-width:700px) 92vw, 510px" alt="Area 3, the underground mall: a numbered-plate puzzle around a field of dirt, the drop pad and a guard robot" width="2400" height="1080" loading="lazy"><figcaption>Area 3 — one of the plates is lying</figcaption></figure></li>
+      <li><figure><img src="img/shots-v1/02-crew-640.jpg" srcset="img/shots-v1/02-crew-640.jpg 640w, img/shots-v1/02-crew-1280.jpg 1280w" sizes="(max-width:700px) 92vw, 510px" alt="Area 2, the flood tunnels: Roadie carries a heavy part overhead, with a second crew member to switch to" width="2400" height="1080" loading="lazy"><figcaption>Area 2 — Roadie carries the heavy parts</figcaption></figure></li>
+      <li><figure><img src="img/shots-v1/03-villain-640.jpg" srcset="img/shots-v1/03-villain-640.jpg 640w, img/shots-v1/03-villain-1280.jpg 1280w" sizes="(max-width:700px) 92vw, 510px" alt="Before the Area 3 showdown: the villain bursts in to complain about the wrecked show" width="2400" height="1080" loading="lazy"><figcaption>A villain arrives</figcaption></figure></li>
+      <li><figure><img src="img/shots-v1/04-showdown-640.jpg" srcset="img/shots-v1/04-showdown-640.jpg 640w, img/shots-v1/04-showdown-1280.jpg 1280w" sizes="(max-width:700px) 92vw, 510px" alt="The Area 3 showdown, act 1: red warning squares mark where the villain's trick will land next" width="2400" height="1080" loading="lazy"><figcaption>A showdown in three acts</figcaption></figure></li>
+      <li><figure><img src="img/shots-v1/05-complete-640.jpg" srcset="img/shots-v1/05-complete-640.jpg 640w, img/shots-v1/05-complete-1280.jpg 1280w" sizes="(max-width:700px) 92vw, 510px" alt="Area 5: the MISSION COMPLETE card, with the stolen parts and three likes" width="2400" height="1080" loading="lazy"><figcaption>Mission complete</figcaption></figure></li>
+      <li><figure><img src="img/shots-v1/06-museum-640.jpg" srcset="img/shots-v1/06-museum-640.jpg 640w, img/shots-v1/06-museum-1280.jpg 1280w" sizes="(max-width:700px) 92vw, 510px" alt="The hideout museum: five treasures on pedestals, the crew and the wall of 60 buzz finds" width="2400" height="1080" loading="lazy"><figcaption>The hideout museum</figcaption></figure></li>
+      <li><figure><img src="img/shots-v1/07-chainvault-640.jpg" srcset="img/shots-v1/07-chainvault-640.jpg 640w, img/shots-v1/07-chainvault-1280.jpg 1280w" sizes="(max-width:700px) 92vw, 510px" alt="The Chain Vault: today's vault and the Solana block it was born from, with no wallet connected" width="2400" height="1080" loading="lazy"><figcaption>The Chain Vault — playable without a wallet</figcaption></figure></li>
+      <li><figure><img src="img/shots-v1/08-title-640.jpg" srcset="img/shots-v1/08-title-640.jpg 640w, img/shots-v1/08-title-1280.jpg 1280w" sizes="(max-width:700px) 92vw, 510px" alt="The title screen: the UNDERDIGS logo, with the wallet and settings buttons at the bottom right" width="2400" height="1080" loading="lazy"><figcaption>The title screen</figcaption></figure></li>
+    </ul>
+  </div>
+</section>
+
+<section id="details" class="dark">
+  <div class="wrap">
+    <h2><span>The details</span></h2>
+    <div class="panel">
+      <table>
+        <tr><th>Platform</th><td>Android — Solana Seeker. Played in landscape.</td></tr>
+        <tr><th>Get it</th><td><span data-before>Coming soon to the Solana dApp Store.</span><span data-after hidden><a href="solanadappstore://details?id=com.osho.underdigs">Solana dApp Store</a> — on a Seeker.</span></td></tr>
+        <tr><th>Network</th><td>The story plays offline. No account needed. The Chain Vault reads Solana's public network.</td></tr>
+        <tr><th>Wallet</th><td>Optional. Connect a Solana wallet to record your Chain Vault results on Solana. Each record costs a network fee of about 0.000005 SOL, paid from your wallet.</td></tr>
+        <tr><th>Data</th><td>Your save stays on your device. The game sends nothing to us — there is no OSHO GAMES server. <a href="privacy.html">Privacy policy</a></td></tr>
+        <tr><th>Languages</th><td>English · 日本語 · 简体中文 · Español</td></tr>
+        <tr><th>Contact</th><td><a href="mailto:ai.hitori.osho@gmail.com">ai.hitori.osho@gmail.com</a></td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="../">OSHO GAMES</a>
+      <a href="privacy.html">Privacy policy</a>
+      <a href="terms.html">Terms of use</a>
+      <a href="licenses.html">Licences</a>
+      <a href="mailto:ai.hitori.osho@gmail.com">Contact</a>
+    </nav>
+    <p class="ja" lang="ja">UNDERDIGS（アンダーディグス）は、地下の街 NEW BULLION CITY を舞台にした、1マスずつ掘って解く立体パズルです。個性のちがう怪盗チームを動かし、司令官キヨばあの無線をたよりに、5つのエリアの金庫からお宝を部品ごとに盗み出して、「創設者の最初の金庫」の謎にせまります。見張りのロボはこちらが手を使った時だけ動くので、じっくり作戦を立てて解けます。毎日、Solana のその日最初のブロックから世界共通の「鎖の金庫」が生まれ、破った記録を Solana に刻んで、世界の怪盗と腕を比べられます（ウォレットの接続は任意。接続しなくても遊べます）。</p>
+    <p class="copy">© 2026 OSHO GAMES</p>
+  </div>
+</footer>
+
+</body>
+</html>
