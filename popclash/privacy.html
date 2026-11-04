@@ -25,6 +25,8 @@
   @media (prefers-color-scheme: dark){ th,td{ border-color:#3a3748; } }
   ul { padding-left:1.2rem; }
   li { margin:.3rem 0; }
+  pre { background:rgba(127,127,127,.12); padding:.7rem .9rem; border-radius:8px;
+        font-size:.9rem; line-height:1.5; white-space:pre-wrap; word-wrap:break-word; }
 </style>
 </head>
 <body>
@@ -32,7 +34,7 @@
 <p style="margin:0 0 1.4rem"><a href="index.html">← POP CLASH</a></p>
 
 <h1>POP CLASH — Privacy Policy</h1>
-<p class="sub">Last updated: 1 November 2026 (version 2.0)</p>
+<p class="sub">Last updated: 5 November 2026 (version 3.0)</p>
 
 <div class="box">POP CLASH plays entirely offline. There is no account and no
 sign-in. Two features are optional and you choose whether to use them: connecting
@@ -42,28 +44,36 @@ the network switched off, exactly as before.</div>
 <h2>What the app collects on its own</h2>
 <p>Nothing. There is no analytics, no advertising, no crash reporting and no
 third-party SDK that transmits data. The app requests no runtime permissions: no
-camera, microphone, contacts, location, storage or identifiers. Besides internet
-access, which only the optional ranking uses, it declares vibration, for short
-haptic feedback during matches, and two normal permissions added by the libraries
-it is built with: viewing the network state, and reordering the app's own screens.
+camera, microphone, contacts, location, storage or identifiers. It declares three
+normal permissions: internet access, which only the optional ranking uses; viewing
+the network state (whether a connection exists), added by the wallet connection
+library and the game engine; and vibration, for short haptic feedback during
+matches, which can be turned off in Settings.
 None of them asks you for anything, and nothing about them is sent anywhere.
 Nothing is sent anywhere
 unless you press a button that says it will.</p>
 
 <h2>What the app stores on your device</h2>
-<p>One save file, held in the app's own private storage. It contains your coins,
-the equipment you own and have equipped, your skill levels, your quest progress,
-your chosen language, a count of matches played and won, and — if you have played
-the weekly challenge — your best record for the current week (how many fighters
-you beat, and your time) together with the recorded button presses from that run.
-It also keeps your daily mini-game results, the friend challenge codes you have
-played, your fighter records and rewards, and your settings (button layout,
-vibration, flashes, controllers). The save file never leaves your device; only your
-weekly challenge record is sent, and only if you submit it to the ranking.
-Uninstalling the app removes it.</p>
-<p>If you connect a wallet, the app also stores your wallet's public address and
-the authorisation token the wallet gave it, so you do not have to approve again
-every time. Disconnecting removes both.</p>
+<p>Everything is kept in the app's own storage on your phone
+(<code>Android/data/io.popclash.game</code>). Uninstalling the app removes it.</p>
+<ul>
+  <li><strong>Your progress</strong> — coins, gear, skills, quests, records, stamps and
+  challenge records, with one backup copy.</li>
+  <li><strong>Your settings</strong> — controls, language, vibration and similar.</li>
+  <li><strong>Settings for this phone only</strong> — frame rate, sound and music volume,
+  and whether your version 2 save has already been brought over and when.</li>
+  <li><strong>If you connect a wallet</strong> — its public address and the display name
+  shown on screen, and the public address with the authorisation token the wallet
+  gave the app, in the app's private preferences.</li>
+  <li><strong>Bringing over your version 2 save (new in 3.0):</strong> version 2 kept its
+  save inside the app's web storage. The first time 3.0 opens, it reads that save
+  once, on your phone, and copies your progress into the new save. Nothing is sent
+  anywhere. If 3.0 already has a save on the phone, nothing is copied. The old data
+  stays in the app's storage until you uninstall the app.</li>
+  <li><strong>Android backup:</strong> Android's own backup and phone-to-phone transfer
+  may include your game save and settings. The wallet's address and authorisation
+  token are excluded from both.</li>
+</ul>
 
 <h2>Connecting a wallet (optional)</h2>
 <p>Connecting uses the Solana Mobile Wallet Adapter, which talks to a wallet app
@@ -74,6 +84,13 @@ any blockchain — the only thing it ever asks for is a signature that proves yo
 own the address, and only when you submit to the ranking. If you have not
 connected a wallet yet, pressing SUBMIT opens your wallet app once, to connect and
 sign together.</p>
+<p>The message the app asks your wallet to sign is always in exactly this form, and
+the app never asks for a signature on any other message:</p>
+<pre>POP CLASH leaderboard
+build:3.0.0
+week:&lt;week number&gt;
+steps:&lt;length of the run, in game steps&gt;
+input:&lt;SHA-256 of the recorded button presses&gt;</pre>
 <p>If your wallet reports a display name for the account (for example a Seeker ID
 ending in <code>.skr</code>), the app shows that name instead of your address.</p>
 
@@ -91,7 +108,7 @@ operated by OSHO GAMES:</p>
   <tr><td>The week number, how many fighters you beat, and your time</td><td>The entry itself.</td></tr>
   <tr><td><strong>The button presses recorded during that run</strong></td><td>So the server can replay the run and confirm the record is real. Without this, any record could be claimed. It is a list of which buttons were held on each frame — nothing else.</td></tr>
   <tr><td>A signature made by your wallet</td><td>To prove the entry came from the owner of that address.</td></tr>
-  <tr><td>The version number of the game</td><td>So the server replays with the matching version of the game code.</td></tr>
+  <tr><td>The version number of the game (<code>3.0.0</code>)</td><td>So the server replays with the matching version of the game code.</td></tr>
 </table>
 <p>What is sent is a record of that single challenge run. It contains no personal
 information, no contacts, no device identifiers and nothing about anything else
@@ -118,6 +135,8 @@ apart. The recorded run (the button presses only) of each of the top
 ten entries on a board can be downloaded from our server by anyone, so that it can
 be replayed and watched in the game. Other recorded runs are kept so an entry can
 be re-checked; they are not published.</p>
+<p>Version 3.0 starts new boards. Records made with version 2.0 stay on the
+version 2.0 boards.</p>
 <p>Entries are kept while the game is in service. You can ask us to delete yours
 at any time — email the address below from any address, telling us the wallet
 address to remove.</p>
@@ -163,6 +182,19 @@ no chat, messaging or other way for players to communicate.</p>
 <h2>Changes</h2>
 <p>If a future version collects anything not described here, this page will be
 updated before that version is released, and the change will be described here.</p>
+
+<h3>What changed in version 3.0</h3>
+<ul>
+  <li>The game was rebuilt as a native app. It still works fully offline, and the
+  wallet and the ranking are still optional.</li>
+  <li>The first time 3.0 opens, it reads your version 2 save once, on your phone,
+  and copies your progress into the new save. Nothing is sent.</li>
+  <li>Permissions: internet access, viewing the network state and vibration. The
+  permission to reorder the app's own screens is gone.</li>
+  <li>The ranking keeps separate boards for each version of the game, so 3.0 starts
+  new boards.</li>
+  <li>3.0 needs Android 8.0 or later.</li>
+</ul>
 
 <h3>What changed in version 2.0</h3>
 <p>The weekly ranking lists any run that beats at least one fighter, and records
