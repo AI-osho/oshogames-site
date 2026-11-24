@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>OSHO GAMES — games for phones</title>
-<meta name="description" content="An independent game studio. Small, fast games built to be played with two thumbs.">
+<title>OSHO GAMES — independent game studio</title>
+<meta name="description" content="An independent, one-person game studio. Made by one. Played by anyone.">
 <link rel="canonical" href="https://oshogames.com/">
 <link rel="icon" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OSHO GAMES">
 <meta property="og:title" content="OSHO GAMES">
-<meta property="og:description" content="An independent game studio. Small, fast games built to be played with two thumbs.">
+<meta property="og:description" content="An independent, one-person game studio. Made by one. Played by anyone.">
 <meta property="og:url" content="https://oshogames.com/">
 <meta property="og:image" content="https://oshogames.com/img/og.png">
 <meta property="og:image:width" content="1200">
@@ -27,7 +27,8 @@
   "url": "https://oshogames.com/",
   "logo": "https://oshogames.com/img/favicon.png",
   "email": "ai.hitori.osho@gmail.com",
-  "description": "An independent studio making small, fast games — built to be picked up with two thumbs and put down again."
+  "sameAs": ["https://x.com/osho_game"],
+  "description": "An independent, one-person game studio. Made by one. Played by anyone. The studio is black and white. The games are not."
 }
 </script>
 <style>
@@ -59,24 +60,51 @@
   .wrap{max-width:1040px; margin-inline:auto; padding-inline:24px}
 
   /* ---------- top bar ---------- */
-  .bar{position:sticky; top:0; z-index:20; background:var(--paper); border-bottom:3px solid var(--ink)}
+  /* メニューとの区切り＝ファミコン（NES）の窓のような二重線（白3・黒3・白3） */
+  .bar{position:sticky; top:0; z-index:20; background:var(--paper); border-bottom:9px double var(--ink)}
   .bar .wrap{display:flex; align-items:center; gap:13px; height:66px}
-  .bar .face{width:44px; height:44px; display:block; border:2px solid var(--ink); image-rendering:auto}
+  .bar .mark{width:28px; height:28px; display:block}
   .bar b{font:400 11px/1 var(--pxfont); white-space:nowrap}
   .bar nav{margin-left:auto; display:flex; gap:20px; font-size:14px}
   .bar nav a{text-decoration:none; padding:4px 3px}
   .bar nav a:hover{background:var(--ink); color:var(--paper)}
 
-  /* ---------- hero（白黒・特大ドット） ---------- */
-  .hero{position:relative; text-align:center; padding:104px 0 62px; overflow:hidden}
-  .hero:before{content:""; position:absolute; inset:0 0 auto 0; height:320px;
-    background:url("img/fade-studio.png") repeat-x top left; image-rendering:pixelated}
-  .hero .inner{position:relative; background:var(--paper); padding:40px 24px 34px;
-    max-width:820px; margin-inline:auto}
-  .hero .face{width:192px; height:192px; display:block; margin:0 auto 30px;
-    border:5px solid var(--ink); image-rendering:auto}
-  .hero h1{margin:0 0 20px; font:400 clamp(20px,4.6vw,42px)/1.25 var(--pxfont); word-spacing:.3em}
-  .hero p{margin:0 auto; max-width:46ch; font-size:14.5px}
+  /* ---------- hero: 起動ロゴを黒にそのまま置く＝ゲームの起動画面（白い網は DEV の帯だけ） ---------- */
+  .hero{text-align:center; padding:clamp(40px,7vh,84px) 0 12px}
+  .hero h1{margin:0}
+  /* 起動ロゴの「O」（ゲームの起動画面と同じ絵）。枠なし・拡大は整数倍だけ＝ぼかさない */
+  .bootmark{display:block; margin:0 auto; width:176px; height:240px; image-rendering:pixelated}
+  /* 社名は前のサイトの正面と同じ字（Press Start 2P） */
+  .wordmark{display:block; margin-top:34px; font:400 clamp(20px,4.6vw,42px)/1.25 var(--pxfont); word-spacing:.3em}
+  .tagline{margin:30px auto 0; max-width:60ch; font-size:14.5px}
+  /* 正面の大きな2行（A）。下の小さな1行（C）は .tagline の字のまま */
+  .tagline .nb{display:inline-block}   /* 文の途中で折らない */
+  .tagline .lead{display:block; font:400 clamp(11px,1.5vw,17px)/1.9 var(--pxfont); margin-bottom:8px; letter-spacing:.02em}
+  .cue{display:inline-flex; flex-direction:column; align-items:center; gap:10px; margin-top:26px;
+    padding:8px 12px; font:400 9px/1 var(--pxfont); text-decoration:none; letter-spacing:.08em}
+  .cue:hover,.cue:focus-visible{background:var(--ink); color:var(--paper)}
+  .cue .tri{font-size:10px; animation:blink 1s steps(1) 3}   /* 3回だけ点滅して止まる（5秒未満） */
+  @keyframes blink{50%{opacity:0}}
+
+  /* ---------- NOW PLAYING（PR ムービーが横に流れる帯） ---------- */
+  .reel{padding:18px 0 8px}
+  .reelhead{display:flex; align-items:center; gap:16px; margin-bottom:18px}
+  .reel-toggle{margin-left:auto; font:400 10px/1 var(--pxfont); color:var(--ink); background:var(--paper);
+    border:2px solid var(--ink); padding:9px 12px; cursor:pointer}
+  .reel-toggle:hover,.reel-toggle:focus-visible{background:var(--ink); color:var(--paper)}
+  .reel-viewport{overflow:hidden; outline-offset:4px}
+  .reel-track{display:flex; gap:22px; width:max-content; margin:0; padding:0 0 4px 22px; list-style:none;
+    animation:reel var(--reel-dur,48s) linear infinite}
+  .reel.paused .reel-track,.reel-viewport:hover .reel-track,.reel-viewport:focus-within .reel-track{animation-play-state:paused}
+  @keyframes reel{to{transform:translateX(-50%)}}
+  .clip{flex:none}
+  .clip a{display:block; width:448px; text-decoration:none; border:4px solid var(--c); background:var(--paper)}
+  /* カードは全部 16:9 にそろえる。縦長・横長の動画は黒の中に収める（黒＝背景と同じ） */
+  .clip video{display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:contain; background:var(--paper)}
+  .clip .cap{display:flex; align-items:center; gap:10px; background:var(--c); color:var(--paper);
+    padding:8px 10px 7px; font:400 10px/1 var(--pxfont)}
+  .clip .cap i{font:400 11px/1 var(--uifont); font-style:normal; margin-left:auto}
+  .clip a:hover .cap,.clip a:focus-visible .cap{background:var(--paper); color:var(--c)}
 
   /* ---------- section headings ---------- */
   .sechead{padding-top:34px}
@@ -113,8 +141,12 @@
   .go.alt:hover{background:var(--c); color:var(--paper)}
   .tip{font-size:11.5px; margin:14px 0 0}
 
+  /* ---------- DEV（作っている人）: ゲームの帯と同じ形・色はスタジオの白＝同じ白い網 ---------- */
+  .devband .inner{grid-template-columns:192px minmax(0,1fr)}
+  .devband .face{width:192px; height:192px; display:block; border:4px solid var(--c); image-rendering:auto}
+
   /* ---------- about（白黒に戻る） ---------- */
-  .about{border-top:3px solid var(--ink); margin-top:46px; padding:52px 0 56px}
+  .about{border-top:3px solid var(--ink); margin-top:0; padding:52px 0 56px}
   .cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:30px; margin-top:26px}
   .cols h3{margin:0 0 10px; font:400 11px/1.5 var(--pxfont)}
   .cols p{margin:0; font-size:14px}
@@ -124,44 +156,84 @@
   footer a{text-decoration:none; border-bottom:1px solid var(--ink)}
   footer a:hover{background:var(--ink); color:var(--paper)}
   .colophon{font-size:12px; max-width:64ch}
+  /* X（旧 Twitter）へのリンク＝X の公式ロゴだけ。白のまま・網なし（64px 以下） */
+  .social{display:flex; gap:12px; margin:0 0 18px}
+  .social a{display:inline-flex; padding:6px; margin-left:-6px; border:0; line-height:0}
+  .social .xlogo{width:24px; height:24px; display:block; image-rendering:auto}
+  .social a:hover,.social a:focus-visible{background:var(--ink); color:var(--paper)}
 
   @media (max-width:820px){
-    .band .inner{grid-template-columns:1fr; gap:26px}
+    .band .inner,.devband .inner{grid-template-columns:1fr; gap:26px}
     .band{padding:120px 0 50px}
-    .hero{padding:92px 0 64px}
+    .devband{padding-top:144px}   /* 白い網は 112px＝ゲームの網より長いので、顔との間をあける */
     .bar b{font-size:9px}
     .bar .wrap{gap:10px}
-    .bar .face{width:38px; height:38px}
-    .hero .face{width:136px; height:136px; border-width:4px; margin-bottom:24px}
     .bar nav{gap:13px; font-size:13px}
   }
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  /* 起動ロゴの O: ふつうは2倍。大きい画面だけ3倍・小さい画面と横向きのスマホは1倍 */
+  @media (min-width:1200px) and (min-height:1000px){ .bootmark{width:264px; height:360px} }
+  @media (max-width:340px),(max-height:560px){ .bootmark{width:88px; height:120px} .wordmark{margin-top:20px} }
+  @media (max-width:600px){
+    .tagline{margin-top:24px; font-size:14px}
+    .wordmark{margin-top:26px}
+    .clip a{width:288px}
+    .reel-track{gap:14px; padding-left:16px}
+    .devband .face{width:128px; height:128px}
+    .bar nav{gap:11px}
+  }
+  @media (max-width:400px){ .bar nav a.contact{display:none} }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reel-track{animation:none}
+    .cue .tri{animation:none}
+    .reel-viewport{overflow-x:auto; scroll-snap-type:x mandatory}
+    .clip{scroll-snap-align:start}
+  }
 </style>
 </head>
 <body>
 
 <div class="bar">
   <div class="wrap">
-    <img class="face" src="img/osho-face-sm.png" alt="" width="96" height="96">
+    <img class="mark" src="img/mark.svg" alt="" width="28" height="28">
     <b>OSHO GAMES</b>
     <nav>
       <a href="#games">Games</a>
+      <a href="#dev">Dev</a>
       <a href="#about">About</a>
-      <a href="mailto:ai.hitori.osho@gmail.com">Contact</a>
+      <a class="contact" href="mailto:ai.hitori.osho@gmail.com">Contact</a>
     </nav>
   </div>
 </div>
 
 <header class="hero">
   <div class="wrap">
-    <div class="inner">
-      <img class="face" src="img/osho-face.png" alt="OSHO GAMES" width="384" height="384">
-      <h1>OSHO GAMES</h1>
-      <p>An independent studio making small, fast games —
-         built to be picked up with two thumbs and put down again.</p>
-    </div>
+    <h1><img class="bootmark" src="img/osho-mark-o_white@1x.png" alt="" width="88" height="120"><span class="wordmark">OSHO GAMES</span></h1>
+    <p class="tagline"><span class="lead">MADE BY ONE.<br>PLAYED BY ANYONE.</span><span class="nb">The studio is black and white.</span> <span class="nb">The games are not.</span></p>
+    <a class="cue" href="#now" aria-label="Skip to Now Playing"><span>PRESS START</span><span class="tri" aria-hidden="true">&#9660;</span></a>
   </div>
 </header>
+
+<!-- ===================== NOW PLAYING（PR ムービーの帯） ===================== -->
+<section class="reel" id="now" aria-labelledby="reel-h">
+  <div class="wrap reelhead">
+    <h2 id="reel-h">NOW PLAYING</h2>
+    <button class="reel-toggle" type="button" aria-pressed="false">&#10074;&#10074; PAUSE</button>
+  </div>
+  <div class="reel-viewport" aria-label="Short muted clips of our games. Scrolls sideways; hover, focus or press Pause to stop.">
+    <ul class="reel-track">
+      <li class="clip" style="--c:#E8467C"><a href="popclash/" aria-label="POP CLASH — view the game">
+        <video muted loop playsinline preload="none" poster="pr/popclash-poster.jpg" width="1280" height="720"><source src="pr/popclash.webm" type="video/webm"><source src="pr/popclash.mp4" type="video/mp4"></video>
+        <span class="cap"><b>POP CLASH</b><i>OUT NOW</i></span></a></li>
+      <li class="clip" style="--c:#F3A502"><a href="cubesquad/" aria-label="CUBE SQUAD — view the game">
+        <video muted loop playsinline preload="none" poster="pr/cubesquad-poster.jpg" width="1280" height="720"><source src="pr/cubesquad.webm" type="video/webm"><source src="pr/cubesquad.mp4" type="video/mp4"></video>
+        <span class="cap"><b>CUBE SQUAD</b><i>OUT NOW</i></span></a></li>
+      <li class="clip" style="--c:#FFC93C"><a href="underdigs/" aria-label="UNDERDIGS — view the game">
+        <video muted loop playsinline preload="none" poster="pr/underdigs-poster.jpg" width="1280" height="720"><source src="pr/underdigs.webm" type="video/webm"><source src="pr/underdigs.mp4" type="video/mp4"></video>
+        <span class="cap"><b>UNDERDIGS</b><i>OUT NOW</i></span></a></li>
+    </ul>
+  </div>
+</section>
 
 <div class="wrap sechead" id="games"><h2>GAMES</h2></div>
 
@@ -172,21 +244,21 @@
     <div>
       <p class="kicker">OUT NOW</p>
       <h3><a href="popclash/">POP CLASH</a></h3>
-      <p class="desc">Eight fighters, one arena. Damage builds a percentage instead of draining a
-         health bar — the higher yours climbs, the further the next hit sends you.
-         Version 3.0 rebuilds it as a native app, with combo stamps, a VS cover before
-         every match and a comic-book spread for the final hit — plus a new mini-game
-         every day, weekly medals and a bot to beat. The weekly ranking and the
-         wallet stay optional, and the whole game plays offline.</p>
+      <p class="desc">Eight fighters. One arena. No health bars — every hit pushes your percentage
+         up, and the higher it climbs, the farther the next one sends you flying.
+         Version 3.0 is a full native rebuild: combo stamps, a VS cover before every match
+         and a comic-book spread for the final blow. Plus a new mini-game every day,
+         weekly medals and a bot to beat. The whole game plays offline; the weekly
+         ranking and the wallet are optional.</p>
       <ul class="meta">
         <li>Android</li><li>Platform fighter</li><li>Plays offline</li>
-        <li>vs CPU</li><li>8 languages</li><li>Free</li><li>Weekly ranking</li>
+        <li>Vs. CPU</li><li>8 languages</li><li>Free</li><li>Weekly ranking</li>
       </ul>
       <div class="gorow">
         <a class="go" href="solanadappstore://details?id=io.popclash.game">GET IT</a>
         <a class="go alt" href="popclash/">VIEW THE GAME</a>
       </div>
-      <p class="tip">The store link opens only on a phone with the Solana dApp Store (Seeker or Saga). Anywhere else, use “View the game”.</p>
+      <p class="tip">GET IT opens the Solana dApp Store — on a Seeker or Saga only. Anywhere else, choose View the game.</p>
     </div>
   </div>
 </section>
@@ -198,11 +270,12 @@
     <div>
       <p class="kicker">OUT NOW</p>
       <h3><a href="cubesquad/">CUBE SQUAD</a></h3>
-      <p class="tip" style="margin:-4px 0 16px">Called GUNZ STRIKE while it was in development.</p>
-      <p class="desc">Drag to move. Your squad does the shooting. A one-thumb action shooter in
-         a chunky voxel style: lead up to two partners through 13 sectors of the quarantine zone,
-         break the cocoons to free survivors, pick and awaken weapons from 18, and take the Hive.
-         The whole game plays offline; the wallet is only for an optional Seeker perk.</p>
+      <p class="tip" style="margin:-4px 0 16px">Developed under the name GUNZ STRIKE.</p>
+      <p class="desc">Drag to move. Your squad does the shooting. A one-thumb action shooter
+         built from chunky voxels — take up to two partners through 13 sectors of the
+         quarantine zone, crack the cocoons to free survivors, choose from 18 weapons and
+         awaken them, then storm the Hive. The whole game plays offline; the wallet only
+         unlocks an optional perk for Seeker owners.</p>
       <ul class="meta">
         <li>Android</li><li>Action shooter</li><li>One thumb</li><li>Voxel</li>
         <li>Plays offline</li><li>4 languages</li>
@@ -211,7 +284,7 @@
         <a class="go" href="solanadappstore://details?id=com.osho.cubesquad">GET IT</a>
         <a class="go alt" href="cubesquad/">VIEW THE GAME</a>
       </div>
-      <p class="tip">The store link opens only on a Seeker with the Solana dApp Store. Anywhere else, use “View the game”.</p>
+      <p class="tip">GET IT opens the Solana dApp Store — on a Seeker only. Anywhere else, choose View the game.</p>
     </div>
   </div>
 </section>
@@ -223,11 +296,11 @@
     <div>
       <p class="kicker">OUT NOW</p>
       <h3><a href="underdigs/">UNDERDIGS</a></h3>
-      <p class="tip" style="margin:-4px 0 16px">Called RELIC DIVER while it was in development.</p>
-      <p class="desc">A 3D dig-by-dig heist puzzle. Lead a crew of thieves through five areas
-         beneath NEW BULLION CITY — the guard robots move only when you act, so every move is
-         yours to plan. The story plays offline; every day a new Chain Vault is born from
-         Solana's first block of the day.</p>
+      <p class="tip" style="margin:-4px 0 16px">Developed under the name RELIC DIVER.</p>
+      <p class="desc">A 3D heist puzzle, one dig at a time. Lead a crew of thieves through five
+         areas beneath NEW BULLION CITY. The guard robots move only when you do — so every
+         move is yours to plan. The story plays offline, and every day a new Chain Vault
+         is born from Solana's first block of the day.</p>
       <ul class="meta">
         <li>Android</li><li>Puzzle</li><li>Voxel</li><li>100 missions</li>
         <li>Story plays offline</li><li>4 languages</li>
@@ -236,7 +309,21 @@
         <a class="go" href="solanadappstore://details?id=com.osho.underdigs">GET IT</a>
         <a class="go alt" href="underdigs/">VIEW THE GAME</a>
       </div>
-      <p class="tip">The store link opens only on a Seeker with the Solana dApp Store. Anywhere else, use “View the game”.</p>
+      <p class="tip">GET IT opens the Solana dApp Store — on a Seeker only. Anywhere else, choose View the game.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DEV ===================== -->
+<div class="wrap sechead" id="dev"><h2>DEV</h2></div>
+<section class="band devband" style="--c:#FFFFFF; --fade:url('img/fade-studio.png')">
+  <div class="wrap inner">
+    <img class="face" src="img/osho-face.png" alt="Osho, the one person behind OSHO GAMES" width="384" height="384">
+    <div>
+      <p class="kicker">SOLO DEVELOPER</p>
+      <h3>OSHO</h3>
+      <p class="desc">Design, code, art direction, sound, even the store pages —
+         one person, start to finish.</p>
     </div>
   </div>
 </section>
@@ -248,17 +335,12 @@
     <div class="cols">
       <div>
         <h3>WHAT WE MAKE</h3>
-        <p>Small games for phones. Short sessions, nothing to learn first, and playable
-           with two thumbs while standing up.</p>
-      </div>
-      <div>
-        <h3>HOW THEY ARE MADE</h3>
-        <p>One person, start to finish — code, art, sound and the store pages.
-           Small on purpose. It is the only way they get finished.</p>
+        <p>Fighters, shooters and heist puzzles you can play today — and bigger games
+           in the works. Whatever the size, it has to feel good to play.</p>
       </div>
       <div>
         <h3>GET IN TOUCH</h3>
-        <p>Press, feedback, or anything else:<br>
+        <p>Press, feedback, bug reports — or just say hi:<br>
            <a href="mailto:ai.hitori.osho@gmail.com">ai.hitori.osho@gmail.com</a></p>
       </div>
     </div>
@@ -279,10 +361,43 @@
       <a href="underdigs/terms.html">UNDERDIGS terms</a>
       <a href="mailto:ai.hitori.osho@gmail.com">ai.hitori.osho@gmail.com</a>
     </nav>
-    <p class="colophon">© 2026 OSHO GAMES · a one-person studio.<br>
-       The studio is black and white. The colour belongs to the games.</p>
+    <div class="social">
+      <a href="https://x.com/osho_game" rel="me noopener" target="_blank" aria-label="OSHO GAMES on X (@osho_game)" title="@osho_game on X"><svg class="xlogo" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
+    </div>
+    <p class="colophon">© 2026 OSHO GAMES · an independent one-person studio.</p>
   </div>
 </footer>
 
+<script>
+/* NOW PLAYING: 同じ列をつなげて切れ目なく流す・見えている動画だけ再生・止めるボタン（WCAG 2.2.2）・動きを減らす設定では流さない */
+(function(){
+  var reel=document.querySelector('.reel'); if(!reel) return;
+  var vp=reel.querySelector('.reel-viewport'), track=reel.querySelector('.reel-track'), btn=reel.querySelector('.reel-toggle');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var paused=reduce;
+  if(!reduce){
+    var originals=Array.prototype.slice.call(track.children);
+    var setW=track.scrollWidth, copies=Math.max(1,Math.ceil((vp.clientWidth*2)/setW));
+    for(var k=0;k<copies;k++){ originals.forEach(function(li){
+      var c=li.cloneNode(true); c.setAttribute('aria-hidden','true');
+      c.querySelectorAll('a').forEach(function(a){a.tabIndex=-1;}); track.appendChild(c); }); }
+    /* 前半と後半が同じ並びになるよう、偶数組にそろえる */
+    if((copies+1)%2){ originals.forEach(function(li){ var c=li.cloneNode(true); c.setAttribute('aria-hidden','true');
+      c.querySelectorAll('a').forEach(function(a){a.tabIndex=-1;}); track.appendChild(c); }); }
+    track.style.setProperty('--reel-dur', Math.round(track.scrollWidth/2/40)+'s'); /* 40px/秒 */
+  }
+  var vids=track.querySelectorAll('video');
+  function setPaused(p){ paused=p; reel.classList.toggle('paused',p); btn.setAttribute('aria-pressed',p?'true':'false');
+    btn.innerHTML=p?'&#9654; PLAY':'&#10074;&#10074; PAUSE';
+    vids.forEach(function(v){ if(p){v.pause();} else if(v.dataset.vis==='1'){ var pr=v.play(); if(pr&&pr.catch) pr.catch(function(){}); } }); }
+  btn.addEventListener('click',function(){ setPaused(!paused); });
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ var v=e.target;
+      v.dataset.vis=e.isIntersecting?'1':'0';
+      if(e.isIntersecting){ if(v.preload==='none') v.preload='auto'; if(!paused){ var pr=v.play(); if(pr&&pr.catch) pr.catch(function(){}); } }
+      else v.pause(); }); }, {root:vp, rootMargin:'0px 200px'});
+  vids.forEach(function(v){ io.observe(v); });
+  setPaused(paused);
+})();
+</script>
 </body>
 </html>
