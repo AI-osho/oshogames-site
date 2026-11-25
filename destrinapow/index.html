@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Destrina POW — Wreck the whole town (Roblox)</title>
+<meta name="description" content="A demolition party game on Roblox. Join Red or Blue and smash buildings, castles and giant monsters — up to 8 players a server. Free to play on PC, phone and tablet.">
+<link rel="canonical" href="https://oshogames.com/destrinapow/">
+<link rel="icon" href="img/icon-96.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OSHO GAMES">
+<meta property="og:title" content="Destrina POW">
+<meta property="og:description" content="Wreck the whole town! A demolition party game on Roblox for up to 8 players.">
+<meta property="og:url" content="https://oshogames.com/destrinapow/">
+<meta property="og:image" content="https://oshogames.com/destrinapow/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Destrina POW — the red title over a player flying past a smiling skyscraper in a toy-coloured city">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "Destrina POW",
+  "alternateName": "デストリーナPOW",
+  "url": "https://oshogames.com/destrinapow/",
+  "image": "https://oshogames.com/destrinapow/img/og.jpg",
+  "description": "A demolition party game on Roblox. Join Red or Blue and smash buildings, castles and giant monsters — up to 8 players a server.",
+  "genre": "Party game",
+  "gamePlatform": "Roblox",
+  "numberOfPlayers": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 8 },
+  "inLanguage": "ja",
+  "sameAs": ["https://www.roblox.com/games/82203704363958"],
+  "publisher": { "@type": "Organization", "name": "OSHO GAMES", "url": "https://oshogames.com/" }
+}
+</script>
+<style>
+  /* 書体はサイト内に同梱（外部 CDN に依存しない）
+     Press Start 2P — SIL Open Font License 1.1 */
+  @font-face{font-family:"Press Start 2P";font-style:normal;font-weight:400;font-display:swap;
+    src:url("../fonts/press-start-2p.woff2") format("woff2")}
+
+  /* ============================================================
+     DESTRINA POW — 決まりの色（10/15 本人）
+     ・クレイジーレッド #FF1A1A ＋ 黒。白は ふち と 小さい字だけ
+     ・題字の絵はゲームと同じ（Roblox の部屋の art/logo/destrina_pow_title_1024.png）
+     上の帯とフッターはスタジオの面なので白黒のまま。
+     ============================================================ */
+  :root{
+    --red:#FF1A1A; --ink:#000000; --deep:#3A0000; --cell:#141414;
+    --bone:#F4F4F4; --muted:#BDBDBD;
+    --px:"Press Start 2P", ui-monospace, monospace;
+    --body:system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth; background:var(--ink)}
+  body{margin:0; background:var(--ink); color:var(--bone); font:16px/1.7 var(--body);
+       -webkit-text-size-adjust:100%}
+  img{max-width:100%; display:block}
+  a{color:inherit}
+  .wrap{max-width:1080px; margin-inline:auto; padding-inline:20px}
+  .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+  /* ---------- スタジオの帯（白黒） ---------- */
+  .bar{position:sticky; top:0; z-index:20; background:#000; color:#fff; border-bottom:3px solid #fff}
+  .bar .wrap{display:flex; align-items:center; gap:12px; height:60px}
+  .bar .face{flex:0 0 auto; width:40px; height:40px; border:2px solid #fff; image-rendering:auto}
+  .bar a:first-child{flex:0 0 auto; line-height:0}
+  .bar .home{font:400 11px/1 var(--px); color:#fff; text-decoration:none; white-space:nowrap}
+  .bar nav{margin-left:auto; display:flex; gap:6px}
+  .bar nav a{font:400 10px/1 var(--px); color:#fff; text-decoration:none; padding:12px 8px}
+  .bar nav a:hover{background:#fff; color:#000}
+  @media (max-width:560px){ .bar nav .wide{display:none} }
+
+  /* ---------- ヒーロー（黒の地に赤い網点＝マンガの「POW」） ---------- */
+  .hero{position:relative; overflow:hidden; text-align:center; padding:30px 0 56px;
+    background:
+      radial-gradient(60% 70% at 50% 35%, rgba(255,26,26,.30), transparent 70%),
+      var(--ink)}
+  .hero:before{content:""; position:absolute; inset:0; pointer-events:none;
+    background-image:radial-gradient(rgba(255,26,26,.28) 2px, transparent 2.5px);
+    background-size:14px 14px;
+    -webkit-mask-image:radial-gradient(70% 80% at 50% 40%, #000 30%, transparent 80%);
+            mask-image:radial-gradient(70% 80% at 50% 40%, #000 30%, transparent 80%)}
+  .hero .wrap{position:relative}
+  .title{width:100%; max-width:640px; height:auto; margin:0 auto}
+  .tag{margin:18px 0 0; font:400 clamp(14px,3.4vw,26px)/1.6 var(--px); color:var(--red)}
+  .sub{margin:14px auto 0; max-width:40rem; font-size:17.5px; line-height:1.6}
+  .ctas{display:flex; flex-wrap:wrap; justify-content:center; gap:16px; margin-top:28px}
+  .btn{display:inline-block; font:400 12px/1.4 var(--px); text-decoration:none; color:#000;
+    background:var(--red); padding:16px 20px; border:3px solid #000;
+    box-shadow:5px 5px 0 #fff, 5px 5px 0 3px #000}
+  .btn.alt{background:var(--bone)}
+  a.btn:active{transform:translate(4px,4px); box-shadow:1px 1px 0 #fff, 1px 1px 0 3px #000}
+  .note{max-width:38rem; margin:26px auto 0; font-size:14.5px; line-height:1.6;
+    background:rgba(0,0,0,.7); border:2px solid var(--red); padding:10px 14px}
+  .chips{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; list-style:none; padding:0; margin:22px 0 0}
+  .chips li{font:400 9.5px/1 var(--px); background:#000; color:var(--red); border:2px solid var(--red); padding:9px 10px}
+
+  /* ---------- セクション ---------- */
+  section{padding:58px 0 64px; border-top:4px solid var(--red)}
+  .dark{background:var(--ink)}
+  .glow{background:radial-gradient(70% 90% at 50% 0%, rgba(255,26,26,.16), transparent 75%), var(--ink)}
+  h2{margin:0 0 22px}
+  h2 span{display:inline-block; font:400 clamp(14px,2.4vw,20px)/1.35 var(--px); color:#000;
+    background:var(--red); padding:12px 16px 10px; border:3px solid #000;
+    box-shadow:6px 6px 0 #fff, 6px 6px 0 3px #000}
+  .lead{max-width:62ch; margin:0 0 30px; font-size:17px}
+
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px}
+  .card{background:var(--cell); border:3px solid #000; padding:0 18px 18px;
+    box-shadow:0 0 0 2px var(--red), 7px 7px 0 2px var(--deep)}
+  .card h3{margin:0 -18px 14px; padding:13px 18px 11px; font:400 11.5px/1.6 var(--px); color:#000;
+    background:var(--red); border-bottom:3px solid #000}
+  .card p{margin:0; font-size:15.5px; line-height:1.65}
+
+  .shots{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:26px; list-style:none; margin:0; padding:0}
+  .shots li:first-child{grid-column:1 / -1}
+  @media (max-width:700px){ .shots{grid-template-columns:1fr; gap:22px} }
+  .shots figure{margin:0}
+  .shots img{width:100%; height:auto; aspect-ratio:16/9; background:#000; border:3px solid #000;
+    box-shadow:0 0 0 2px var(--red), 6px 6px 0 2px var(--deep)}
+  .shots figcaption{margin-top:14px; font-size:14px; line-height:1.5; color:var(--muted)}
+
+  .panel{background:var(--cell); border:3px solid #000; box-shadow:0 0 0 2px var(--red), 8px 8px 0 2px var(--deep)}
+  table{border-collapse:collapse; width:100%; font-size:15.5px}
+  th,td{padding:13px 16px; text-align:left; vertical-align:top; border-bottom:1px solid rgba(255,26,26,.3)}
+  tr:last-child th, tr:last-child td{border-bottom:0}
+  th{width:9em; font:400 10.5px/1.6 var(--px); color:var(--red); padding-top:17px}
+  td a{color:var(--red); font-weight:700}
+  @media (max-width:560px){
+    th,td{display:block; width:auto; border-bottom:0}
+    th{padding-bottom:0}
+    tr{display:block; border-bottom:1px solid rgba(255,26,26,.3)}
+    tr:last-child{border-bottom:0}
+  }
+
+  /* ---------- フッター（白黒に戻る） ---------- */
+  footer{background:#000; color:#fff; border-top:3px solid #fff; padding:36px 0 60px; font-size:14px}
+  footer nav{display:flex; flex-wrap:wrap; gap:8px 18px; margin-bottom:16px}
+  footer a{color:#fff; text-decoration:none; border-bottom:1px solid #fff; padding:6px 0; display:inline-block}
+  footer a:hover{background:#fff; color:#000}
+  .ja{margin:18px 0 0; padding-top:16px; border-top:1px dashed #fff; line-height:1.8}
+  .copy{font:400 10px/1.8 var(--px); margin-top:18px}
+
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} a.btn:active{transform:none}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <a href="../" aria-label="OSHO GAMES — home"><img class="face" src="../img/osho-face-sm.png" alt="" width="96" height="96"></a>
+    <a class="home" href="../">OSHO GAMES</a>
+    <nav>
+      <a class="wide" href="#play">Play</a>
+      <a class="wide" href="#screens">Screens</a>
+      <a href="../#games">All games</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <h1 class="sr">Destrina POW</h1>
+    <img class="title" src="img/title.png" alt="Destrina POW — red brush-style title with a POW burst" width="1024" height="470">
+    <p class="tag">Wreck the whole town!</p>
+    <p class="sub">A demolition party game on Roblox. Join Red or Blue and smash buildings, castles and giant monsters — up to 8 players a server.</p>
+    <div class="ctas">
+      <a class="btn" href="https://www.roblox.com/games/82203704363958" target="_blank" rel="noopener">Play on Roblox</a>
+      <a class="btn alt" href="#screens">See the screens</a>
+    </div>
+    <p class="note">Free to play with a Roblox account. For now, Roblox lets players aged 16 and over (age-checked) join. In-game text is Japanese.</p>
+    <ul class="chips" aria-label="At a glance">
+      <li>Roblox</li><li>PC · Phone · Tablet</li><li>Party game</li><li>Up to 8 players</li><li>Free to play</li>
+    </ul>
+  </div>
+</header>
+
+<section id="play" class="glow">
+  <div class="wrap">
+    <h2><span>How it plays</span></h2>
+    <p class="lead">Play Red vs Blue, or Free mode to smash with no teams. Everyone votes on the stage — seven of them, from a big city to a robot factory. A round takes about two and a half minutes.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>Demolition Battle</h3>
+        <p>Score by smashing the town and by stealing points with prank weapons. The team with the higher total wins. CPUs fill any empty spots.</p>
+      </div>
+      <div class="card">
+        <h3>Castle Battle</h3>
+        <p>Break the core of the enemy castle before they break yours. With 45 seconds left, the castles stand up!</p>
+      </div>
+      <div class="card">
+        <h3>The town fights back</h3>
+        <p>Smash enough and the town gets angry: flying foes, giants and the town's boss. Break every weak part of a giant monster to bring it down.</p>
+      </div>
+      <div class="card">
+        <h3>Grow giant</h3>
+        <p>Grab a capsule as it falls from the sky and grow as tall as a building. There are human cannons, a turf grab and light moon gravity too.</p>
+      </div>
+      <div class="card">
+        <h3>Treasure pals</h3>
+        <p>Carry treasure capsules back to your base. Treasure pals line up on your shelf and make coins — spend them on weapons, rides and looks, and upgrade in the workshop.</p>
+      </div>
+      <div class="card">
+        <h3>Weekends</h3>
+        <p>On Saturdays and Sundays (Japan time), treasure capsules are doubled and giant monsters show up more often. Around 12:00 and 20:00, the Moonlit Raid puts Red and Blue on the same side against the Cloud Whale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="screens" class="dark">
+  <div class="wrap">
+    <h2><span>Screens</span></h2>
+    <ul class="shots">
+      <li><figure><img src="img/shots/t1_battle-1280.jpg" srcset="img/shots/t1_battle-640.jpg 640w, img/shots/t1_battle-1280.jpg 1280w" sizes="(max-width:1080px) 92vw, 1040px" alt="A player with a propeller cap flies past a smiling skyscraper as a cloud bursts against it, with the Destrina POW title in the sky" width="1280" height="720" loading="lazy"><figcaption>Demolition — the whole town is fair game</figcaption></figure></li>
+      <li><figure><img src="img/shots/t2_giant-640.jpg" srcset="img/shots/t2_giant-640.jpg 640w, img/shots/t2_giant-1280.jpg 1280w" sizes="(max-width:700px) 92vw, 510px" alt="A giant player in sunglasses stands taller than the buildings as one crumbles into dust" width="1280" height="720" loading="lazy"><figcaption>Grow giant!</figcaption></figure></li>
+      <li><figure><img src="img/shots/t3_kaiju-640.jpg" srcset="img/shots/t3_kaiju-640.jpg 640w, img/shots/t3_kaiju-1280.jpg 1280w" sizes="(max-width:700px) 92vw, 510px" alt="A huge green monster with an open mouth towers over the city under a low sun while a player flies beside it" width="1280" height="720" loading="lazy"><figcaption>A giant monster</figcaption></figure></li>
+      <li><figure><img src="img/shots/t4_raid-640.jpg" srcset="img/shots/t4_raid-640.jpg 640w, img/shots/t4_raid-1280.jpg 1280w" sizes="(max-width:700px) 92vw, 510px" alt="Night in the city: the cloud-shaped whale looms over blue skyscrapers with faces" width="1280" height="720" loading="lazy"><figcaption>The Moonlit Raid</figcaption></figure></li>
+      <li><figure><img src="img/shots/t5_base-640.jpg" srcset="img/shots/t5_base-640.jpg 640w, img/shots/t5_base-1280.jpg 1280w" sizes="(max-width:700px) 92vw, 510px" alt="The base: eight treasure pals with little faces sit on a two-row shelf" width="1280" height="720" loading="lazy"><figcaption>Collect treasure pals</figcaption></figure></li>
+    </ul>
+  </div>
+</section>
+
+<section id="details" class="glow">
+  <div class="wrap">
+    <h2><span>The details</span></h2>
+    <div class="panel">
+      <table>
+        <tr><th>Platform</th><td>Roblox — PC, phone (landscape) and tablet.</td></tr>
+        <tr><th>Play it</th><td><a href="https://www.roblox.com/games/82203704363958" target="_blank" rel="noopener">Destrina POW on Roblox</a></td></tr>
+        <tr><th>Players</th><td>Up to 8 a server. CPUs fill empty spots in team battles.</td></tr>
+        <tr><th>Price</th><td>Free to play.</td></tr>
+        <tr><th>Ages</th><td>For now, players aged 16 and over (age-checked by Roblox). We plan to open it to all ages through Roblox's review.</td></tr>
+        <tr><th>Language</th><td>In-game text is Japanese. The Roblox page is in Japanese and English, with Roblox's automatic translation into more languages.</td></tr>
+        <tr><th>Data</th><td>Your progress is saved by Roblox. The game sends nothing to us — there is no OSHO GAMES server. Roblox's own terms and privacy policy apply.</td></tr>
+        <tr><th>Contact</th><td><a href="mailto:ai.hitori.osho@gmail.com">ai.hitori.osho@gmail.com</a></td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="../">OSHO GAMES</a>
+      <a href="../#games">All games</a>
+      <a href="mailto:ai.hitori.osho@gmail.com">Contact</a>
+    </nav>
+    <p class="ja" lang="ja">デストリーナPOW は、Roblox で遊ぶ、町まるごとこわしていい解体パーティーゲームです。赤チームと青チームに分かれて、ビルも城も巨大モンスターもぶっこわします。1ラウンドは約2分半、1つのサーバーに8人まで。ステージはみんなの投票で決まり、こわすほど町が怒って反撃してきます。空から落ちてくるカプセルを取れば、ビルくらいの巨人に。土日（日本時間）の12時ごろと20時ごろの「月夜の大襲来」では、赤も青もみんな味方になって雲のクジラにいどみます。お宝カプセルを基地へ運んでお宝キャラを集め、遊んでためたコインで武器・のりもの・見た目をそろえましょう。無料で遊べます（Roblox のアカウントが必要です）。パソコン・スマホ（横向き）・タブレットに対応し、ゲームの中の字は日本語です。今は Roblox の決まりで、16歳以上（Roblox で年齢を確認した人）が遊べます。</p>
+    <p class="copy">© 2026 OSHO GAMES</p>
+  </div>
+</footer>
+
+</body>
+</html>

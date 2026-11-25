@@ -109,6 +109,7 @@
   /* ---------- section headings ---------- */
   .sechead{padding-top:34px}
   h2{font:400 13px/1 var(--pxfont); margin:0}
+  .secnote{margin:12px 0 0; font-size:12.5px}
 
   /* ---------- ゲームの帯（ここだけカラー） ---------- */
   .band{position:relative; background:var(--paper); border-top:8px solid var(--c);
@@ -181,7 +182,9 @@
     .devband .face{width:128px; height:128px}
     .bar nav{gap:11px}
   }
-  @media (max-width:400px){ .bar nav a.contact{display:none} }
+  @media (max-width:520px){ .bar nav a.wide{display:none} }
+  @media (max-width:420px){ .bar nav a.contact{display:none} }
+  @media (max-width:340px){ .bar nav{gap:8px} .bar .wrap{gap:8px} }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .reel-track{animation:none}
@@ -199,6 +202,7 @@
     <b>OSHO GAMES</b>
     <nav>
       <a href="#games">Games</a>
+      <a class="wide" href="#roblox">Roblox</a>
       <a href="#dev">Dev</a>
       <a href="#about">About</a>
       <a class="contact" href="mailto:ai.hitori.osho@gmail.com">Contact</a>
@@ -314,6 +318,35 @@
   </div>
 </section>
 
+<!-- ===================== ROBLOX（Roblox で遊ぶゲーム） ===================== -->
+<div class="wrap sechead" id="roblox"><h2>ROBLOX</h2><p class="secnote">Games you play on Roblox — free with a Roblox account.</p></div>
+
+<!-- ===================== DESTRINA POW（デストリーナPOW） ===================== -->
+<section class="band" style="--c:#FF1A1A; --fade:url('img/fade-destrinapow.png')">
+  <div class="wrap inner">
+    <a class="art photo" href="destrinapow/"><img src="img/destrinapow-banner.jpg" alt="Destrina POW — the red title over a player flying past a smiling skyscraper in a toy-coloured city" width="1200" height="600"></a>
+    <div>
+      <p class="kicker">OUT NOW</p>
+      <h3><a href="destrinapow/">DESTRINA POW</a></h3>
+      <p class="tip" style="margin:-4px 0 16px">Japanese title: <span lang="ja">デストリーナPOW</span></p>
+      <p class="desc">Wreck the whole town! Join Red or Blue and smash buildings, castles and giant
+         monsters in a demolition party game for up to eight players. Vote on the stage, grab a
+         falling capsule to grow as tall as a building, and on weekends team up against the Cloud
+         Whale in the Moonlit Raid. Collect treasure pals and spend the coins you earn by playing
+         on gear and upgrades.</p>
+      <ul class="meta">
+        <li>Roblox</li><li>PC · Phone · Tablet</li><li>Party game</li>
+        <li>Up to 8 players</li><li>Free to play</li><li>In-game text: Japanese</li>
+      </ul>
+      <div class="gorow">
+        <a class="go" href="https://www.roblox.com/games/82203704363958" target="_blank" rel="noopener">PLAY ON ROBLOX</a>
+        <a class="go alt" href="destrinapow/">VIEW THE GAME</a>
+      </div>
+      <p class="tip">For now, Roblox lets players aged 16 and over (age-checked) join.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== DEV ===================== -->
 <div class="wrap sechead" id="dev"><h2>DEV</h2></div>
 <section class="band devband" style="--c:#FFFFFF; --fade:url('img/fade-studio.png')">
@@ -335,8 +368,9 @@
     <div class="cols">
       <div>
         <h3>WHAT WE MAKE</h3>
-        <p>Fighters, shooters and heist puzzles you can play today — and bigger games
-           in the works. Whatever the size, it has to feel good to play.</p>
+        <p>Fighters, shooters and heist puzzles on Android, a demolition party on
+           Roblox — and bigger games in the works. Whatever the size, it has to feel
+           good to play.</p>
       </div>
       <div>
         <h3>GET IN TOUCH</h3>
@@ -359,6 +393,7 @@
       <a href="underdigs/">UNDERDIGS</a>
       <a href="underdigs/privacy.html">UNDERDIGS privacy</a>
       <a href="underdigs/terms.html">UNDERDIGS terms</a>
+      <a href="destrinapow/">DESTRINA POW</a>
       <a href="mailto:ai.hitori.osho@gmail.com">ai.hitori.osho@gmail.com</a>
     </nav>
     <div class="social">
